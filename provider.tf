@@ -1,12 +1,13 @@
 terraform {
 
- cloud {
+backend "remote" {
+    hostname     = "app.terraform.io"
     organization = "watchdog"
 
     workspaces {
       name = "aws-cloud-resume-terraform"
     }
-  }
+}
 
   required_providers {
     aws = {
