@@ -1,14 +1,11 @@
 terraform {
 
-backend "remote" {
-    hostname     = "app.terraform.io"
-    organization = "watchdog"
-
-    workspaces {
-      name = "aws-cloud-resume-terraform"
-    }
-    token = "tf_token"
-}
+backend "s3" {
+    bucket = "github-aws-cloud-resume-terraform" 
+    region = "us-east-1"                   
+    key    = "global/s3/terraform.tfstate"
+    encrypt = true
+  }
 
   required_providers {
     aws = {
