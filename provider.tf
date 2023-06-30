@@ -7,6 +7,7 @@ backend "remote" {
     workspaces {
       name = "aws-cloud-resume-terraform"
     }
+    token = var.tf_token
 }
 
   required_providers {
