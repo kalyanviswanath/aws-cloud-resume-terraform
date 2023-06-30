@@ -31,6 +31,9 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-
+        
+      - name: Configure Terraform Cloud
+        run: terraform login ${TF_API_TOKEN}
+        
       - name: Terraform Plan
         run: terraform plan 
