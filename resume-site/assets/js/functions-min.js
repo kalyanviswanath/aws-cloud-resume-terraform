@@ -1306,7 +1306,9 @@ if (document.getElementsByClassName('demo').length > 0) {
     var i = 0;
     var txt = `About-Me --more 
   
-              -Hey there! 👋 This is my Cloud Resume Challenge profile, and I'm a Systems Engineer with more than 5 years of experience. Although I'm still learning AWS, I'm excited to expand my expertise in troubleshooting, problem-solving, and building and deploying cloud infrastructure using tools like Terraform. I have hands-on experience with various AWS services such as EC2, S3, RDS, and Lambda, and I can work independently or as part of a team to ensure project delivery within deadlines. 🚀`;
+              -Hey there! This is my Cloud Resume Challenge profile. I'm a highly motivated System Administrator with over 5 years of experience in managing complex IT systems. While I'm still in the process of mastering AWS, I'm enthusiastic about learning and honing my skills in cloud computing.
+
+              When it comes to troubleshooting and problem-solving, I'm in my element! I thrive on challenges and take pride in finding effective solutions that boost system efficiency and ensure smooth operations. I'm a quick learner, always eager to explore new technologies and adapt to different environments. I have a track record of providing exceptional technical support to both internal and external customers. I genuinely enjoy working collaboratively with diverse teams and believe in learning from one another.`;
     var speed = 30;
   
     function typeItOut () {
