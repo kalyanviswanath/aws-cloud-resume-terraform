@@ -5,6 +5,7 @@ resource "aws_s3_bucket" "s3_bucket" {
     Name = "My bucket"
   }
 }
+/*
 resource "null_resource" "local_provisioner" {
   depends_on = [aws_s3_bucket.s3_bucket]
 
@@ -13,8 +14,6 @@ resource "null_resource" "local_provisioner" {
     command = "aws s3 sync resume-site/ s3://${aws_s3_bucket.s3_bucket_id} --delete"
   }
 }
-
-/*
 resource "null_resource" "local_provisioner" {
   triggers = {
     timestamp = timestamp()
