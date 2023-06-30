@@ -19,12 +19,12 @@ jobs:
               AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
               AWS_REGION: ${{ secrets.AWS_REGION }}
               AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-              DISTRIBUTION_ID: ${{ secrets.DISTRIBUTION_ID }}
+              
             run: |
               aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
               aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY 
               aws configure set default.region $AWS_REGION
               aws s3 sync --delete ./resume-site/ s3://$AWS_S3_BUCKET/
               sleep 5
-              aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+              
     
