@@ -1,4 +1,4 @@
-# Cloudresume Resume Challenge
+# AWS Cloud Resume Challenge using Terraform
 Resources for cloud resume challenge.
 
 ![Application Diagram]( https://github.com/kalyanviswanath/aws-cloud-resume-terraform/blob/main/Cloud%20Resume%20Challenge.png )
