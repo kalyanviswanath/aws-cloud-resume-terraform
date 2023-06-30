@@ -12,7 +12,7 @@ resource "null_resource" "local_provisioner" {
   }
 
   provisioner "local-exec" {
-    command = "aws s3 sync resume-site/ s3://${aws_s3_bucket.s3_bucket.bucket} --delete"
+    command = "aws s3 sync resume-site/ s3://${aws_s3_bucket.s3_bucket.bucket_regional_domain_name} --delete"
     #working_dir = "resume-site/"
     #interpreter = ["bash", "-c"]
   }
