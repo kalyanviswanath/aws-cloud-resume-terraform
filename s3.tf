@@ -10,7 +10,7 @@ resource "null_resource" "local_provisioner" {
 
   provisioner "local-exec" {
 
-    command = "aws s3 sync resume-site/ s3://${module.s3_bucket.s3_bucket_id} --delete"
+    command = "aws s3 sync resume-site/ s3://${aws_s3_bucket.s3_bucket_id} --delete"
   }
 }
 
