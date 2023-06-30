@@ -1,0 +1,57 @@
+name: Terraform Plan and Apply
+on:
+  workflow_dispatch:
+ 
+env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+
+
+jobs:
+  terraform_plan:
+    name: 'Terraform plan'
+    runs-on: ubuntu-latest
+    environment: Production
+    defaults:
+        run:
+            shell: bash    
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan 
+
+  terraform_apply:
+          name: 'Terraform apply'
+          runs-on: ubuntu-latest
+          needs: [terraform_plan]
+          environment: dev
+          defaults:
+              run:
+                  shell: bash    
+            
+          steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            
+            - name: Set up Terraform
+              uses: hashicorp/setup-terraform@v1
+            
+            - name: Terraform Init
+              run: terraform init
+            
+            - name: Terraform apply
+              run: |
+               terraform apply -auto-approve
+              
+              
