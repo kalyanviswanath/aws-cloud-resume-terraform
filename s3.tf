@@ -5,19 +5,28 @@ resource "aws_s3_bucket" "s3_bucket" {
     Name = "My bucket"
   }
 }
+resource "null_resource" "local_provisioner" {
+  depends_on = [aws_s3_bucket.s3_bucket]
 
+  provisioner "local-exec" {
+
+    command = "aws s3 sync resume-site/ s3://${module.s3_bucket.s3_bucket_id} --delete"
+  }
+}
+
+/*
 resource "null_resource" "local_provisioner" {
   triggers = {
     timestamp = timestamp()
   }
 
   provisioner "local-exec" {
-    command = "aws s3 sync resume-site/ s3://${aws_s3_bucket.s3_bucket.bucket_regional_domain_name} --delete"
+    command = "aws s3 sync resume-site/ s3://${aws_s3_bucket.s3_bucket.bucket_id} --delete"
     #working_dir = "resume-site/"
     #interpreter = ["bash", "-c"]
   }
 }
-
+*/
 data "aws_iam_policy_document" "s3_policy" {
   statement {
     actions   = ["s3:GetObject"]
