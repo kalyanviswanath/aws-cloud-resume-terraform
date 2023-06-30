@@ -1,11 +1,8 @@
 name: Terraform Plan
 on:
-  
-  pull_request:
+  push:
     branches:
       - main
-    paths:
-        - 'resume-site/**'
   workflow_dispatch:
  
 env:
