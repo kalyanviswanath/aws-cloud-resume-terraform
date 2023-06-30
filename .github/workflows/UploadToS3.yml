@@ -3,7 +3,7 @@ name: Upload to resume.kalyanviswanath.com S3 bucket
 on:
   push:
     paths:
-      - 'site/**'
+      - 'resume-site/**'
       
   workflow_dispatch:
 
