@@ -34,4 +34,11 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan 
-  
+
+  trigger_upload:
+          needs: terraform_plan
+          if: ${{ needs.terraform_plan.result == 'success' }}
+          runs-on: ubuntu-latest
+          steps:
+            - name: Trigger Upload to S3
+              uses: ./.github/workflows/UploadToS3
