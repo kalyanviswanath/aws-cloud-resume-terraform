@@ -1,6 +1,8 @@
 name: Terraform Destroy
 on:
-  
+  push:
+    branches:
+      - destroy
   workflow_dispatch:
  
 env:
