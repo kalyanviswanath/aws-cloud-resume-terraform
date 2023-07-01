@@ -2076,17 +2076,3 @@ body {
         }
 }
 
-.button-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  @media (max-width: 600px) {
-    .button-container {
-      flex-direction: column;
-    }
-  
-    .button-container a {
-      margin-top: 10px; /* Adjust the value as needed for the desired spacing */
-    }
-  }
