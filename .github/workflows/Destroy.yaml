@@ -1,6 +1,8 @@
 name: Terraform Destroy
 on:
-  
+  push:
+    branches:
+      - destroy
   workflow_dispatch:
  
 env:
@@ -12,7 +14,7 @@ env:
 
 jobs:
   terraform_destroy:
-    name: 'Terraform destroy'
+    name: 'Terraform Destroy'
     runs-on: ubuntu-latest
     environment: Production
     defaults:

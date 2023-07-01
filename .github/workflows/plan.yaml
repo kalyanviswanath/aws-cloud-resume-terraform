@@ -15,7 +15,7 @@ env:
 
 jobs:
   terraform_plan:
-    name: 'Terraform plan'
+    name: 'Terraform Plan'
     runs-on: ubuntu-latest
     environment: Production
     defaults:
@@ -34,4 +34,4 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan 
-  
+
