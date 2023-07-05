@@ -37,7 +37,7 @@
             <img src="assets/favicon.ico" alt="Global">
             <p>Kalyan Viswanath</p>
           </a>
-          <label class="header--cta cta is-active">Visitor Count: <span class="counter-number"></span></label>
+          
         </header>
         
         <ul class="l-main-content main-content">
@@ -45,6 +45,7 @@
             <!--Summary Section-->
             <div class="intro">
               <div class="intro--banner">
+                
                 <h1>Hey, There</h1>
                 <h3><span class="terraform-color">Cloud deployed through Terraform </span></h3><br>
                 <h3><span class="theme-color">I have so much to offer that I cant fit it all on a phone screen! Check out my site on a computer browser. </span></h3><br>
@@ -70,15 +71,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<script>
-   const counter = document.querySelector(".counter-number");
-   async function updateCounter(){
-    let response = await fetch("https://iagitxlx45lst6lk7yexbb3zm40qzaal.lambda-url.us-east-1.on.aws/");
-    let data = await response.json();
-    counter.innerHTML = `${data}`;
-   }
-   updateCounter();
-</script>
+
 
 </body>
 </html>
