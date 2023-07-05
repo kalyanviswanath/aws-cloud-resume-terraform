@@ -37,7 +37,7 @@
             <img src="assets/favicon.ico" alt="Global">
             <p>Kalyan Viswanath</p>
           </a>
-          
+          <label class="header--cta cta is-active">Visitor Count: <span class="counter-number"></span></label>
         </header>
         
         <ul class="l-main-content main-content">
@@ -66,7 +66,19 @@
   </div>
   
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
+<script>
+   const counter = document.querySelector(".counter-number");
+   async function updateCounter(){
+    let response = await fetch("https://iagitxlx45lst6lk7yexbb3zm40qzaal.lambda-url.us-east-1.on.aws/");
+    let data = await response.json();
+    counter.innerHTML = `${data}`;
+   }
+   updateCounter();
+</script>
 
 </body>
 </html>
