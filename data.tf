@@ -4,6 +4,6 @@ data "aws_route53_zone" "hosted_zone" {
 }
 
 data "aws_acm_certificate" "example" {
-  domain   = "kalyanviswanath.com"  # Replace with your domain name
+  domain   = "*.kalyanviswanath.com"  # Replace with your domain name
   statuses = ["ISSUED"]     # Optionally specify additional statuses if needed
 }
