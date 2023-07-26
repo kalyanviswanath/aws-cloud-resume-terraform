@@ -19,7 +19,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   is_ipv6_enabled     = true
   comment             = "Some comment"
   default_root_object = "index.html"
-  aliases = ["kalyanviswanath.com"]
+  aliases = ["resume.kalyanviswanath.com"]
   # AWS Managed Caching Policy (CachingDisabled)
   default_cache_behavior {
     # Using the CachingDisabled managed policy ID:
