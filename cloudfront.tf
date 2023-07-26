@@ -38,10 +38,9 @@ resource "aws_cloudfront_distribution" "cdn" {
     max_ttl                = 0
   }
   price_class = "PriceClass_100"
-  restrictions {
+    restrictions {
     geo_restriction {
-      restriction_type = "whitelist"
-      locations        = ["US", "CA", "GB", "DE"]
+      restriction_type = "none"
     }
   }
 
