@@ -6,5 +6,5 @@ variable "aws_region" {
 variable "domain_name" {
   type        = string
   description = "The domain name to use"
-  default     = "resume.kalyanviswanath.com"
+  default     = "kalyanviswanath.com"
 }
