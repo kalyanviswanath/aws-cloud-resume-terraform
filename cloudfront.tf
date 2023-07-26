@@ -38,7 +38,9 @@ resource "aws_cloudfront_distribution" "cdn" {
     max_ttl                = 0
   }
   price_class = "PriceClass_100"
-  
+  restrictions {
+    geo_restriction {}
+  }
 
     viewer_certificate {
     acm_certificate_arn      = data.aws_acm_certificate.example.arn
