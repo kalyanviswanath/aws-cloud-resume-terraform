@@ -1,7 +1,7 @@
 
 resource "aws_route53_record" "terraform_alias" {
   zone_id = data.aws_route53_zone.hosted_zone.zone_id
-  name    = "resume.kalyanviswanath.com"
+  name    = "kalyanviswanath.com"
   type    = "A"
 
   alias {
