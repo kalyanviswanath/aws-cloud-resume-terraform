@@ -1,0 +1,22 @@
+/* -----------------------------------------------------------------
+    - Clients
+----------------------------------------------------------------- */
+
+.js-carousel-clients {
+  padding-top: rem(8px);
+  padding-bottom: rem(16px);
+  
+  .swiper-slide {
+	  text-align: center;
+  }
+
+  .logo-client {
+	  max-width: 80%;
+    filter: grayscale(1);
+    transition: all .5s ease-in-out;
+
+    &:hover {
+      filter: grayscale(0);
+    }
+  }
+}

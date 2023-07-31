@@ -1,0 +1,70 @@
+// Button
+.btn {
+  background: var(--color-gradient-border-gray);
+  border-radius: var(--radius-14);
+  box-shadow: var(--box-shadow-40);
+  border: 0;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-weight: 400;
+  font-size: rem(16px);
+  line-height: initial;
+  padding: rem(16px) rem(24px);
+  position: relative;
+  transition: all .4s ease-in-out;
+  white-space: nowrap;
+  z-index: 0;
+  
+  &::before {
+    content: '';
+    @include position(absolute, $top: 1px, $right: 1px, $bottom: 1px, $left: 1px);
+    background: var(--color-btn);
+    //background-clip: padding-box!important;
+    //border: 1px solid transparent;
+    border-radius: inherit; 
+    transition: all .4s ease-in-out;
+    z-index: -1;
+  }
+
+  &:hover {
+    background: var(--color-gradient-border);
+	  color: var(--color-accent);
+  }
+  
+  &:hover::before {
+    background: var(--color-gradient-icon);
+  }
+
+  &:focus {
+    box-shadow: var(--box-shadow-40);
+  }
+  
+  .font-icon {
+    margin-right: rem(6px);
+  }
+  
+  &--small {
+    box-shadow: var(--box-shadow-30);
+    font-size: rem(12px);
+    padding: rem(10px) rem(16px);
+  }
+
+  &--small:focus {
+    box-shadow: var(--box-shadow-30);
+  }
+
+  &--icon-left i {
+    margin-right: rem(8px);
+  }
+
+  &--icon-right i {
+    margin-left: rem(8px);
+  }
+
+  @media only screen and (max-width: $small) {
+    font-size: rem(14px);
+    padding: rem(12px) rem(18px);
+  }
+}
+
+button:focus {outline: none;}

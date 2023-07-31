@@ -1,0 +1,59 @@
+// Flexbox
+@mixin flex-variant($display, $direction: false, $align: false, $justify: false, $wrap: false) {
+  display: $display;
+
+  @if $direction {
+    flex-direction: $direction;
+  }
+
+  @if $align {
+    align-items: $align;
+  }
+
+  @if $justify {
+    justify-content: $justify;
+  }
+
+  @if $wrap {
+    flex-wrap: $wrap;
+  }
+
+  // fix
+  & > * {
+    min-width: 0;
+  }
+}
+
+@mixin flex($direction: false, $align: false, $justify: false, $wrap: false) {
+  @include flex-variant(flex, $direction: $direction, $align: $align, $justify: $justify, $wrap: $wrap);
+}
+
+@mixin inline-flex($direction: false, $align: false, $justify: false, $wrap: false) {
+  @include flex-variant(inline-flex, $direction: $direction, $align: $align, $justify: $justify, $wrap: $wrap);
+}
+
+// px to rem
+@function rem($pixels, $context: $baseSystemFontSize) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return $pixels / $context * 1rem;
+}
+
+// size to one line
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+// Position
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}

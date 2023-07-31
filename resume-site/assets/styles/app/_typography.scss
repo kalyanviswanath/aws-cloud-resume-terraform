@@ -1,0 +1,253 @@
+/* -----------------------------------------------------------------
+    - Typography
+----------------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-heading);
+  font-family: var(--font-family);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.title { 
+  &--h1 {
+    font-size: rem(32px);
+	  margin-bottom: rem(17px);
+	
+	  @media only screen and (max-width: $small) {
+	    font-size: rem(24px);
+	  }
+  }
+
+  &--h2 {
+    font-size: rem(24px);
+	  margin-bottom: rem(20px);
+
+	  @media only screen and (max-width: $small) {
+	    font-size: rem(18px);
+  	}
+  }
+
+  &--h3 {
+    font-size: rem(18px);
+	  margin-bottom: rem(8px);
+	
+	  @media only screen and (max-width: $small) {
+	    font-size: rem(16px);
+	    //margin-bottom: rem(16px);
+	  }  
+  }
+
+  &--h4 {
+    font-size: rem(16px);
+	  margin-bottom: rem(13px);
+	  font-weight: 500;
+
+	  @media only screen and (max-width: $small) {
+	    font-size: rem(14px);
+	  }
+  }
+
+  &--h5 {
+    font-size: rem(14px);
+
+	  @media only screen and (max-width: $small) {
+	    font-size: rem(12px);
+	  }	
+  }
+  
+  &--h6 {
+    font-size: rem(12px);	
+
+    @media only screen and (max-width: $small) {
+	    font-size: rem(10px);
+	  }
+  }
+
+  &--center {
+    text-align: center;
+  }
+  
+  &--tone {
+    background: var(--color-gradient-text);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &-icon {
+    $size: rem(40px);
+	  margin-right: rem(8px);
+	  margin-top: rem(-4px);
+	  height: $size;
+	  width: $size;
+	
+	  @media only screen and (max-width: $small) {
+	    height: #{$size / 1.2};
+	    width: #{$size / 1.2};
+	  }
+  }
+
+  &__separate {
+    margin-bottom: rem(37px);
+    position: relative;
+	
+    &::before {
+      content: '';
+	    background: var(--color-gradient);
+	    border-radius: rem(8px);
+	    height: rem(5px);
+	    @include position(absolute, $left: 0, $bottom: rem(-17px));
+	    width: rem(40px);
+	    z-index: 1;
+    }
+
+    @media only screen and (max-width: $small) {
+	    margin-bottom: rem(24px);
+	  
+	    &::before {
+	      height: rem(3px);
+	      bottom: rem(-10px);
+	      width: rem(30px);
+      }
+	  }
+  }
+}
+
+.overhead {
+  color: var(--color-paragraph);
+  font-size: rem(12px);
+  font-weight: 400;
+  display: block;
+  opacity: .7;
+  text-transform: uppercase;
+
+  @media only screen and (max-width: $small) {
+    font-size: rem(11px);
+  }
+}
+
+.text-overflow {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.block-quote {
+  font: {
+	  size: rem(20px);
+	  weight: 400;
+	  style: italic;
+  }
+  margin: rem(29px) 0;
+  position: relative;
+  line-height: 1.6;
+  
+  @media only screen and (max-width: $large) {
+    padding-left: rem(61px);
+  }  
+  
+  @media only screen and (max-width: $small) {
+    font-size: rem(18px);
+	  margin: rem(16px) 0;
+	  padding-left: 0;
+	  padding-top: rem(45px);
+	
+	  p {
+	    margin-bottom: rem(8px);
+	  }
+  }
+  
+  &::before {
+    background-image: url(../icons/icon-quote.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+	  background-size: cover;
+    content: '';
+    height: rem(18px);
+    margin: 0 auto;
+	  @include position(absolute, $top: rem(8px), $left: rem(-50px));
+    width: rem(27px);
+	
+	  @media only screen and (max-width: $large) {
+      left: 0;
+	  }
+  }
+  
+  &__author {
+    font: {
+	    size: rem(14px);
+	    style: normal;
+    }
+	  display: block;
+	  margin-top: rem(9px);
+	  padding-left: rem(48px);
+	  position: relative;
+	
+	  @media only screen and (max-width: $small) {
+	    font-size: rem(14px);
+	    margin-top: 0;
+	    padding-left: rem(32px);
+	  }
+	
+	  &::before {
+	    content: '';
+	    background-color: var(--color-heading);
+	    height: rem(1px);
+	    margin-bottom: auto;
+	    margin-top: auto;
+	    @include position(absolute, $top: 0, $left: 0, $bottom: 0);
+	    width: rem(32px);
+	  
+	    @media only screen and (max-width: $small) {
+	      width: rem(16px);
+	    }
+	  }
+  }
+}
+
+a {
+  color: var(--color-accent);
+  cursor: pointer;
+  text-decoration: none;
+  
+  &:hover {
+	  outline: none;
+  }
+
+  &.decoration--none {
+    text-decoration: none;
+  }
+
+  &.link-gradient {
+    background: var(--color-gradient-text);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-decoration-skip: objects;
+  }
+}
+
+.description {
+  color: var(--color-paragraph);
+  margin-bottom: rem(30px);
+}
+
+.foreword {
+  font-size: rem(18px);
+}
+
+/* Badges */
+.badge {
+  background: var(--color-surface-2);
+  font-size: rem(12px);
+  font-weight: 300;
+  border-radius: var(--radius-8);
+  padding: rem(8px) rem(16px);
+
+  @media only screen and (max-width: $small) {
+    font-size: rem(11px);
+    padding: rem(6px) rem(12px);
+  }
+}

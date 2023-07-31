@@ -1,0 +1,48 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+$baseSystemFontSize              : 16px;
+
+:root {
+    // Font settings
+    --font-family                : 'Poppins', sans-serif;
+    --font-base-size             : 15px;
+    --font-mobile-size           : 14px;
+
+    // Color
+    --color-heading              : #FCFCFC;
+    --color-paragraph            : #D6D6D6;
+    --color-border               : #383838;
+    --color-bg                   : #121212;
+    --color-surface-1            : #1e1e1f;
+    --color-surface-2            : #2a2a2b;
+    --color-surface-3            : #202021;
+    --color-accent               : #FFDB6E;
+    --color-error                : #B84C4C;
+
+    // Gradien
+    --color-gradient             : linear-gradient(137.84deg, #FFDB6E 26.31%, #FFBC5E 93.75%);
+    --color-gradient-soft        : linear-gradient(135deg, rgba(255, 218, 109, 0.0375) 0%, rgba(255, 189, 94, 0) 100%), #1E1E1F;
+    --color-gradient-text        : linear-gradient(90deg, #FFDB6E, #FFBC5E);
+    --color-gradient-border      : linear-gradient(155deg, #FFDA6D 0%, rgba(255, 191, 96, 0) 50%);
+    --color-gradient-border-gray : linear-gradient(135deg, #404040 0%, rgba(64, 64, 64, 0) 48.44%);
+    --color-gradient-gray        : linear-gradient(137.84deg, #3F3F40 2.69%, #303030 93.75%);
+    --color-gradient-icon        : linear-gradient(135deg, rgba(255, 218, 109, 0.25) 0%, rgba(255, 189, 94, 0) 59.86%), #202021;
+    --color-btn                  : linear-gradient(135deg, rgba(45, 45, 46, 0.25) 0%, rgba(27, 27, 28, 0) 100%), #202021;    
+
+    // Shadow
+    --box-shadow-24              : -4px 8px 24px rgba(0, 0, 0, 0.25);
+    --box-shadow-30              : 0px 16px 30px rgba(0, 0, 0, 0.25);
+    --box-shadow-40              : 0px 16px 40px rgba(0, 0, 0, 0.25);
+    --box-shadow-50              : 0px 25px 50px rgba(0, 0, 0, 0.15);
+    --box-shadow-80              : 0px 24px 80px rgba(0, 0, 0, 0.7);
+
+    // Radius
+    --radius-32                  : 32px;
+    --radius-20                  : 20px;
+    --radius-18                  : 18px;
+    --radius-16                  : 16px;
+    --radius-14                  : 14px;
+    --radius-12                  : 12px;
+    --radius-8                   : 8px;
+}

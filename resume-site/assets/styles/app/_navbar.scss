@@ -1,0 +1,98 @@
+/* -----------------------------------------------------------------
+    - Navbar
+----------------------------------------------------------------- */
+
+$size-nav: rem(64px);
+
+// Nav
+.nav-container {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 0 var(--radius-20) 0 var(--radius-20);
+  @include flex($align: center, $justify: flex-end);
+  height: $size-nav;
+  padding-right: rem(38px);
+  padding-left: rem(38px);
+  @include position(absolute, $top: 0, $right: 0);
+  z-index: 1;
+  
+  @media only screen and (max-width: $large) {
+    backdrop-filter: blur(6px);
+    background: rgba(43, 43, 44,.75);
+    border-radius: var(--radius-20) var(--radius-20) 0 0;
+    box-shadow: var(--box-shadow-30);
+    @include flex($align: center, $justify: center);
+    @include position(fixed, $top: auto, $left: 0, $bottom: 0);
+    height: #{$size-nav - rem(3px)};
+    width: 100%;
+    z-index: 1112;
+  }
+  
+  @media only screen and (max-width: $small) {
+    border-radius: var(--radius-12) var(--radius-12) 0 0;
+    height: rem(48px);
+    padding-right: rem(16px);
+    padding-left: rem(16px);
+  }
+}
+
+.medium-zoom--opened .nav-container {
+  @media only screen and (max-width: $large) {
+    z-index: 10;
+  }
+}
+
+.nav {
+  @include flex($align: center, $justify: center);
+  height: 100%;
+  overflow: hidden;
+  
+  @media only screen and (max-width: $medium) {
+    font-size: rem(14px);
+  }  
+  
+  @media only screen and (max-width: $small) {
+	  font-size: rem(11px)
+  }
+  
+  &__item {
+    margin-right: rem(44px);
+	
+  	@media only screen and (max-width: $large) {
+	    margin-right: rem(32px);
+  	}
+	
+	  @media only screen and (max-width: $small) {
+	    margin-right: rem(20px);
+	  }
+	
+	  a {
+      background: none;
+	    color: var(--color-paragraph);
+      -webkit-text-fill-color: inherit;
+      font-weight: 500;
+	    opacity: 1;
+      transition: all .3s ease-in-out;
+
+	    &:hover {
+        opacity: .6;
+        text-decoration: none;
+	    }
+	  
+	    &.active {
+	      background: var(--color-gradient-text);
+        -webkit-background-clip: text;
+                background-clip: text;
+        -webkit-text-fill-color: transparent;
+	    }
+
+      &.active:hover {
+        opacity: 1;
+      }
+	  }
+  }
+	
+  &__item:last-child {
+	  margin-right: 0;
+  }  
+}

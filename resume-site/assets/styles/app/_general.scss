@@ -1,0 +1,106 @@
+/* -----------------------------------------------------------------
+    - General Styles
+----------------------------------------------------------------- */
+
+*,
+::before,
+::after {
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-overflow-scrolling: touch;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  //-ms-overflow-x: hidden;
+}
+
+body, html {
+  font-size: rem(16px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-paragraph);
+  font-family: var(--font-family);
+  font-size: var(--font-base-size);
+  font-weight: 300;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -ms-overflow-style: scrollbar;
+  -webkit-font-smoothing: antialiased;
+  
+  @media only screen and (max-width: $small) {
+    font-size: var(--font-mobile-size);
+    line-height: 1.6;
+  }
+}
+
+html.is-scroll-disabled body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  html.is-scroll-disabled {
+    overflow: hidden;
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+  -ms-overflow-style: none;
+}
+
+.no-scroll-height {
+  overflow-x: hidden;
+}
+
+.svg-defs {
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+
+img {
+  max-width: 100%;
+  -webkit-user-select: none;
+	 -moz-user-select: none;
+	  -ms-user-select: none;
+	      user-select: none;
+}
+
+figure {
+  margin: 0;
+}
+
+iframe {
+  background-color: var(--color-bg);
+  border: 0;
+  display: block;
+  height: 100%;
+  width: 100%;  
+}
+
+.cover {
+  object-fit: cover;
+  object-position: center;
+  font-family: 'object-fit: cover; object-position: center;';
+  height: 100%;
+  width: 100%;
+}
+
+::-moz-selection {background: transparent; color: var(--color-accent)}
+	 ::selection {background: transparent; color: var(--color-accent)} 
+
+// Scroll Indicator
+.scroll-line {
+  background: var(--color-gradient);
+  height: rem(3px);
+  @include position(fixed, $top: 0);
+  width: 0;
+  z-index: 3;
+}

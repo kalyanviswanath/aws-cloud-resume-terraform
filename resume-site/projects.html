@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Kalyan Viswanath</title>
+    <title>Kalyan Viswanath - Projects</title>
 
 	<!-- Meta Data -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,13 +34,12 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="./assets/images/favicons/favicon.ico">
 	<link rel="apple-touch-icon" sizes="57x57" href="./assets/images/favicons/favicon.ico">
 	<link rel="shortcut icon" href="./assets/images/favicons/favicon.ico" type="image/png">
-
+	
     <!-- Styles -->
 	<link rel="stylesheet" type="text/css" href="./assets/styles/vendors/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="./assets/styles/style.css"/>
 	
 </head>
-<body>
     <main class="main">
 	    <div class="container gutter-top gutter-bottom">
 		    <div class="row sticky-parent">
@@ -87,84 +86,76 @@
 
 						    <!-- Social -->
 						    <div class="social">
-							    <a class="social__link" href="https://www.linkedin.com/in/kalyan-viswanath"><i class="feathericon-linkedin"></i></a>
-							    <a class="social__link" href="https://github.com/kalyanviswanath/aws-cloud-resume-terraform"><i class="feathericon-github"></i></a>
+							    <a class="social__link" href="https://www.facebook.com/"><i class="feathericon-linkedin"></i></a>
+							    <a class="social__link" href="https://www.behance.com/"><i class="feathericon-github"></i></a>
 						  	    <a class="social__link" href="https://www.linkedin.com/"><i class="fe fe-bookmark"></i></a>
 						    </div>
 						</div>	
-					</div>	
+					</div>		
 		        </aside>
 		        
 				<!-- Content -->
 		        <div class="col-12 col-md-12 col-xl-9">
-				    <div class="box-outer">
+				    <div class="box-outer pb-0">
 					    <!-- Menu -->
 						<div class="nav-container">
 						    <ul class="nav">
-                                <li class="nav__item"><a class="active" href="index.html">About</a></li>
+                                <li class="nav__item"><a href="index.html">About</a></li>
 								<li class="nav__item"><a href="resume.html">Resume</a></li>
-                                <li class="nav__item"><a href="projects.html">Projects</a></li>
+                                <li class="nav__item"><a class="active" href="projects.html">Projects</a></li>
                                 <li class="nav__item"><a href="certifications.html">Certifications</a></li>
                             <!--<li class="nav__item"><a href="contact.html">Contact</a></li> -->
                             </ul>
 						</div>
 						
 					    <!-- About -->
-						<div class="pb-0 pb-sm-2">
-		                    <h1 class="title title--h1 title__separate">About Me</h1>
-						    <p>Hey there! 🙌 I'm a passionate cloud computing enthusiast, always exploring new technologies in this exciting field. Troubleshooting and finding efficient cloud solutions are my strengths, ensuring smooth operations. Finding cloud projects and diving right in is my thing.🌩️</p>
-                            <p>🌐 This website is built as part of the AWS Cloud Resume Challenge🌟, showcasing my proficiency in cloud computing and web development. Leveraging a range of AWS services, including EC2, S3, Lambda, and more, I conceptualized and constructed a robust and scalable cloud infrastructure using Terraform. The project demonstrates my expertise in infrastructure as code and automation, allowing for efficient management and replication of AWS resources while adhering to best practices. With a focus on cloud cost management and DevOps methodologies, I optimized resource allocation and leveraged serverless architecture to ensure the efficient utilization of cloud resources. As a passionate learner in the field, this website reflects my commitment to continuous improvement and pushing the boundaries of what's achievable in the cloud. 🚀</p>
+						<div class="pb-3">
+		                    <h1 class="title title--h1 title__separate">Projects</h1>
 					    </div>
-						
-					    <!-- What -->
-						<h2 class="title title--h2 mt-3">Technologies & Skills</h2>
-						<div class="row">
-							<!-- Case Item -->
-							<div class="col-12 col-lg-6">
-							    <div class="case-item box box--s2 box-inner">
-									<img class="case-item__icon" src="./assets/icons/filetype-json.png" alt="" />
-									<div>
-									    <h3 class="title title--h3">Infrastructure Automation</h3>
-										<p class="case-item__caption">Proficient in leveraging Terraform and Python scripting to automate cloud infrastructure provisioning and enhance operational efficiency.</p>
-									</div>	
-								</div>
-							</div>
-								
-							<!-- Case Item -->
-							<div class="col-12 col-lg-6">
-							    <div class="case-item box box--s2 box-inner">
-									<img class="case-item__icon" src="./assets/icons/code-slash.png" alt="" />
-									<div>
-									    <h3 class="title title--h3">DevOps Implementation</h3>
-										<p class="case-item__caption">Passionate about adopting DevOps methodologies to enhance development and deployment processes, enabling continuous integration and continuous deployment (CI/CD).</p>
+
+						<!-- Filter -->
+                        <div class="select">
+			                <span class="placeholder">Select category</span>
+			                <ul class="filter">
+			                    <li class="filter__item">Category</li>
+				                <li class="filter__item active" data-filter="*"><a class="filter__link active" href="#filter">All</a></li>
+				                <li class="filter__item" data-filter=".category-design"><a class="filter__link" href="#filter">AWS</a></li>
+				                <li class="filter__item" data-filter=".category-applications"><a class="filter__link" href="#filter">Terraform</a></li>
+							<!--<li class="filter__item" data-filter=".category-web-development"><a class="filter__link" href="#filter">Web Development</a></li> -->
+			                </ul>
+			                <input type="hidden" name="changemetoo"/>
+		                </div>
+
+						<!-- Gallery -->
+						<div class="gallery-grid js-masonry js-filter-container">
+							<div class="gutter-sizer"></div>
+							<!-- Item 1 -->
+							<div class="gallery-grid__item category-design">
+								<a href="#">
+								    <div class="gallery-grid__image-wrap">
+                                        <img class="gallery-grid__image cover lazyload" src="./assets/images/280x204.jpg" alt="" />
+								    </div>
+                                    <div class="gallery-grid__caption">
+									    <h3 class="title gallery-grid__title">AWS Cloud Resume Challenge</h3>
+									    <span class="gallery-grid__category">AWS</span>
 									</div>
-								</div>
+								</a>
 							</div>
-								
-							<!-- Case Item -->
-							<div class="col-12 col-lg-6">
-								<div class="case-item box box--s2 box-inner">
-								    <img class="case-item__icon" src="./assets/icons/pc-display.png" alt="" />
-									<div>
-								        <h3 class="title title--h3">Network & System Administration</h3>
-									    <p class="case-item__caption">With over 6 years of experience in managing complex IT systems, possess expertise in configuring and maintaining servers, networking equipment, and virtualization technologies.</p>
+                            
+							<!-- Item 2 -->
+							<div class="gallery-grid__item category-applications">
+								<a href="#">
+								    <div class="gallery-grid__image-wrap">
+                                        <img class="gallery-grid__image cover lazyload" src="./assets/images/280x204.jpg" alt="" />
+								    </div>
+                                    <div class="gallery-grid__caption">
+									    <h3 class="title gallery-grid__title">Architecture Scalling</h3>
+									    <span class="gallery-grid__category">Terraform</span>
 									</div>
-								</div>
+								</a>
 							</div>
-								
-							<!-- Case Item -->
-							<div class="col-12 col-lg-6">
-								<div class="case-item box box--s2 box-inner">
-									<img class="case-item__icon" src="./assets/icons/clipboard2-check.png" alt="" />
-									<div>
-									    <h3 class="title title--h3">Troubleshooting & Performance Optimization</h3>
-										<p class="case-item__caption">Skilled in troubleshooting complex IT issues and optimizing system performance to ensure efficient and reliable operations.</p>
-									</div>
-								</div>
-							</div>
-						</div>				
-						
-					</div><!-- box-outer -->
+						</div><!-- /Gallery -->
+					</div>
 		        </div><!-- Content -->
 			</div><!-- sticky-parent -->
 		</div><!-- container -->
@@ -181,7 +172,7 @@
 		 counter.innerHTML = `${data}`;
 		}
 		updateCounter();
-	 </script> 
+	 </script>
 	<script src="./assets/js/jquery-3.4.1.min.js"></script>
 	<script src="./assets/js/plugins.min.js"></script>
     <script src="./assets/js/common.js"></script>

@@ -1,0 +1,147 @@
+/* -----------------------------------------------------------------
+    - Testimonials
+----------------------------------------------------------------- */
+
+$size-avatar: rem(80px);
+
+.swiper-container {
+  .swiper-wrapper {
+    min-height: 100%;
+  }
+}
+
+.review-item {
+  cursor: pointer;
+  @include flex($direction: column);
+  background-color: var(--color-gradient-soft);
+  border-radius: var(--radius-16);
+  height: auto; //height: calc(100% - #{rem(-38px)});
+  padding: rem(30px) rem(30px) rem(24px);
+  margin-top: rem(40px);
+  
+  &::before {
+    background: var(--color-gradient-soft) 
+                url(../icons/icon-quote.svg);
+    background-repeat: no-repeat;
+    background-position: 0 0, right rem(30px) top rem(24px);
+  }
+
+  @media only screen and (max-width: $small) {
+	  padding: rem(16px);
+    margin-top: rem(24px);
+
+    &::before {
+      background-size: 0, rem(24px);
+      background-position: 0 0, right rem(15px) top rem(15px);
+    }
+  }
+  
+  .box-avatar {
+    margin-top: rem(-60px);
+
+    @media only screen and (max-width: $small) {
+      margin-top: rem(-40px);
+      margin-bottom: rem(8px);
+    }
+  }
+
+  &__caption:last-child {
+    margin-bottom: 0;
+  }
+  
+  .title {
+    margin-top: rem(-22px);
+    margin-left: calc(#{$size-avatar} + #{rem(15px)});
+  	margin-bottom: rem(12px);
+
+	  @media only screen and (max-width: $small) {
+      margin-left: 0;
+	    margin-top: rem(8px);
+	    margin-bottom: rem(8px);
+	  }
+  }
+}
+
+.review-icon-quote {
+  background: url(../icons/icon-quote.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: auto 0;
+  height: rem(24px);
+  max-width: $size-avatar;
+}
+
+.review-date {
+  color: var(--color-paragraph);
+  display: block;
+  opacity: .7;
+  margin: rem(4px) 0 rem(10px);
+}
+
+.full-rewiew-con-avatar {
+  @include flex($direction: column);
+
+  .box-avatar {
+    max-width: $size-avatar;
+    width: auto;
+
+    @media only screen and (max-width: $medium) {
+      height: auto;
+    }
+    @media only screen and (max-width: $small) {
+    margin-bottom: rem(15px);
+    }
+  }
+
+  .review-icon-quote {
+    @media only screen and (max-width: $small) {
+      display: none;
+    }
+  }
+}
+
+.full-rewiew-con-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Carousel pagination */
+.swiper-pagination  {
+  margin-top: rem(8px);
+  position: relative;
+  line-height: 0;
+  
+  @media only screen and (max-width: $small) {
+    margin-top: rem(16px);
+  }
+}
+
+.swiper-pagination-bullet {
+  background: var(--color-surface-2);
+  border-radius: rem(16px);
+  opacity: 1;
+  height: rem(10px);
+  width: rem(10px);
+  transition: width .3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  
+  @media only screen and (max-width: $small) {
+    height: rem(6px);
+    width: rem(6px);
+  }
+  
+  &-active {
+    background: var(--color-gradient);
+	  width: rem(20px);
+	
+	  @media only screen and (max-width: $small) {
+	    width: rem(12px);
+  	}
+  }
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 rem(5px);
+}
+.swiper-container-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-custom, .swiper-pagination-fraction {
+  bottom: 0;
+}

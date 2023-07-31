@@ -1,0 +1,35 @@
+/* -----------------------------------------------------------------
+    - Cases
+----------------------------------------------------------------- */
+
+.case-item {
+  @include flex();
+  height: calc(100% - #{rem(20px)});
+  padding-bottom: rem(20px);
+  position: relative;
+  
+  @media only screen and (max-width: $small) {
+    @include flex($align: center, $direction: column);
+	  text-align: center;
+  }  
+  
+  &__icon {
+    $size: rem(40px);
+	  margin-right: rem(16px);
+	  height: $size;
+	  width: $size;
+	
+	  @media only screen and (max-width: $small) {
+	    margin-right: 0;
+      margin-bottom: rem(13px);
+	  }
+  }
+  
+  div {
+    flex: 1;
+  }
+  
+  &__caption:last-child {
+    margin-bottom: 0;
+  }
+}

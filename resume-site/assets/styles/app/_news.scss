@@ -1,0 +1,112 @@
+/* -----------------------------------------------------------------
+    - News
+----------------------------------------------------------------- */ 
+
+.news-grid {
+  @include flex($wrap: wrap);
+  margin-left: rem(-15px);
+  margin-right: rem(-15px);
+  
+  @media only screen and (max-width: $large) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.news-item {
+  border-radius: var(--radius-16);
+  box-shadow: var(--box-shadow-50);
+  margin-bottom: rem(30px);
+  margin-left: rem(15px);
+  margin-right: rem(15px);
+  padding: 0;
+  width: calc(50% - 30px);
+  
+  @media only screen and (max-width: $large) {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  
+  @media only screen and (max-width: $small) {
+    margin-bottom: rem(20px);
+  }
+  
+  &__image-wrap {
+    overflow: hidden;
+  	border-radius: var(--radius-16);
+  	height: rem(224px);
+	  position: relative;
+	
+	  @media only screen and (max-width: $large) {
+	    height: rem(288px);
+	  }
+	
+	  @media only screen and (max-width: $small) {
+	    border-radius: var(--radius-12);
+	    height: rem(192px);
+  	}
+
+    img {
+      transform: scale(1);
+      transition: transform .3s ease-in-out;
+    }
+  }
+  
+  &:hover .news-item__image-wrap img {
+    transform: scale(1.05);
+    transition: transform .3s ease-in-out;
+  }
+
+  &__date {
+    margin-bottom: rem(12px);
+    opacity: .7;
+
+    span {
+      display: inline-block;
+      padding-right: rem(18px);
+      position: relative;
+    }
+    
+    span::after {
+      content: '';
+      background: var(--color-paragraph);
+      border-radius: 50%;
+      height: rem(4px);
+      margin: auto;
+      @include position(absolute, $top: 0, $bottom: 0, $right: #{rem(7px)});
+      width: rem(4px);
+    }
+  }
+  
+  &__link {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+  }
+  
+  &__caption {
+    padding: rem(20px) rem(24px) rem(6px);
+	
+    @media only screen and (max-width: $small) {
+	    padding: rem(19px) rem(16px) 0;
+  	}
+  }
+  
+  .title {
+    margin-bottom: rem(10px);
+
+    a {
+      color: var(--color-heading);
+      transition: all .3s ease-in-out;
+    }
+
+    a:hover {
+      background: var(--color-gradient-text);
+      -webkit-background-clip: text;
+              background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}

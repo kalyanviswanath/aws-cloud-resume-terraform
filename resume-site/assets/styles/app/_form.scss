@@ -1,0 +1,264 @@
+/* -----------------------------------------------------------------
+    - Form
+----------------------------------------------------------------- */
+
+// Input Text
+%formStyle {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-14);
+  box-shadow: none;
+  color: var(--color-heading);
+  font-size: inherit;
+  height: auto;
+  padding: rem(14px) rem(22px) rem(13px);
+  position: relative;
+  width: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+		  
+  @media only screen and (max-width: $small) {
+    padding: rem(13px) rem(22px) rem(12px);
+  }  
+}
+
+%formStyle-focus {
+  background-color: transparent;
+  border-color: var(--color-accent);
+  color: var(--color-heading);
+  box-shadow: none;
+  outline: none;
+}
+
+.input {
+  @extend %formStyle;
+  line-height: inherit;
+  
+  &:focus {
+    @extend %formStyle-focus;
+  }
+  
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    line-height: 0;
+  }
+  
+  &__icon {
+    padding-left: rem(54px);
+	
+	  @media only screen and (max-width: $small) {
+	    padding-left: rem(45px);
+	  }
+  }
+}
+
+.textarea {
+  @extend %formStyle;
+  border-radius: var(--radius-14);
+  display: block;
+  padding: rem(13px) rem(19px);
+  resize: none;
+  
+  &:focus {
+    @extend %formStyle-focus;
+  }
+}
+
+.form-group {
+  margin-bottom: rem(32px);
+  position: relative;
+  
+  @media only screen and (max-width: $small) {
+    margin-bottom: rem(27px);
+  }
+}
+
+.help-block {
+  position: absolute;
+  font-size: rem(12px);
+  line-height: 1.4;
+  padding-top: rem(5px);
+  padding-left: rem(6px);
+  
+  @media only screen and (max-width: $small) {
+    font-size: rem(11px);
+  }
+}
+
+.with-errors {
+  color: var(--color-error);
+}
+
+.has-error input,
+.has-error textarea,
+.has-error input:focus,
+.has-error textarea:focus {
+  border-color: var(--color-error);
+}
+
+#validator-contact {
+  font-size: rem(14px);
+  margin-top: rem(16px);
+}
+
+.form-control::-webkit-input-placeholder {
+  color: var(--color-paragraph);
+  opacity: .5;
+}
+
+.form-control::-moz-placeholder {
+  color: var(--color-paragraph);
+  opacity: .5;
+}
+
+.form-control:-ms-input-placeholder {
+  color: var(--color-paragraph);
+  opacity: .5;
+}
+
+.form-control::-ms-input-placeholder {
+  color: var(--color-paragraph);
+  opacity: .5;
+}
+
+.form-control::placeholder {
+  color: var(--color-paragraph);
+  opacity: .5;
+}
+
+input:invalid,
+textarea:invalid {
+  outline: none !important;
+}
+
+// Checkbox
+.form-check-input {
+  background: transparent;
+  border-color: rgba(244,244,244, .15);
+
+  &:checked {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  &:checked[type=checkbox] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e")!important;
+  }
+
+  &:checked[type=radio] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23000'/%3e%3c/svg%3e");
+  }
+
+  &:focus {
+    border-color: var(--color-paragraph);
+    box-shadow: 0 0 0 rem(2px) rgba(244,244,244, .25);
+  }
+}
+
+// Select
+select,
+.custom-select {
+  @extend %formStyle;
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23fff' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.1rem center/10px 16px;
+  
+  &:focus {
+    @extend %formStyle-focus;
+  }
+  
+  option {
+    //color: $black-color;
+  }
+}
+
+// Dropdown
+.dropdown {
+  &-menu {
+    background: var(--color-surface-2);
+	  border: 1px solid var(--color-border);
+	  border-radius: var(--radius-12);
+	  box-shadow: var(--box-shadow-50);
+	  font-size: inherit;
+
+  	&::before {
+	    content: '';
+	    border-left: rem(6px) solid transparent;
+      border-right: rem(6px) solid transparent;
+      border-bottom: rem(6px) solid var(--color-border);
+	    height: 0;
+	    @include position(absolute, $top: rem(-6px), $left: rem(17px));
+	    width: 0;
+   	}
+  }
+  
+  &-item {
+    color: var(--color-paragraph);
+    font-weight: 300;
+  }
+  
+  &-item:hover,
+  &-item:focus {
+    background: var(--color-border);
+    color: var(--color-paragraph);
+  }
+
+  &.dropup {
+    .dropdown-menu {
+      &::before {
+	      border-left: rem(6px) solid transparent;
+        border-right: rem(6px) solid transparent;
+	      border-top: rem(6px) solid var(--color-border);
+        border-bottom: rem(6px) solid transparent;
+	      top: auto;
+	      bottom: rem(-12px);
+	    }
+  	}  
+  }
+}
+
+// Progress
+.progress {
+  display: block;
+  background: transparent;
+  font-size: rem(15px);
+  margin-bottom: rem(24px);
+  height: auto;
+
+  @media only screen and (max-width: $small) {
+    font-size: rem(13px);
+    margin-bottom: rem(16px);
+  }
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &-bar {
+    background-color: var(--color-border);
+    border-radius: var(--radius-16);
+    height: rem(8px);
+    overflow: inherit;
+    position: relative;
+    width: 100%;
+  }
+
+  &-bar span {
+    background: var(--color-gradient);
+	  border-radius: rem(16px);
+    display: block;
+	  overflow: hidden;
+	  position: relative;
+    height: rem(8px);
+	  width: 0%;
+    transition: width .6s ease-in-out;
+	  z-index: 1;
+  }
+  
+  .progress-text {
+    margin-bottom: rem(8px);
+
+    span {
+      color: var(--color-heading);
+      font-weight: 500;
+    }
+  }
+}

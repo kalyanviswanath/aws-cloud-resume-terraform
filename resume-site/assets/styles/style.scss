@@ -1,0 +1,77 @@
+$version: "1.1.0";
+
+/* ------------------------------------------------
+ Author: ArtStyles (Art)
+ 
+ Template Name: vCard
+ version: #{$version}
+------------------------------------------------ */
+
+/* ------------------------------------------------
+ 
+ - Vendors
+ - Font Icons
+ - Variables
+ - General Styles
+ - Typography
+ - Form
+ - Button
+ - Sidebar
+ - Sections
+ - Navbar
+ - Popup
+ - Cases
+ - Clients
+ - Contact
+ - Portfolio
+ - News
+ - Single news
+ - Single project
+ - Testimonials
+ - Timeline
+ - Footer
+ - Other
+ 
+------------------------------------------------ */
+
+// Vendors
+@import url('vendors/swiper.min.css');
+@import url('vendors/simplebar.min.css');
+@import url('vendors/magnific-popup.css');
+@import url('vendors/photoswipe.css');
+@import url('vendors/default-skin.css');
+
+// Font Icons
+@import url('../icons/style-custome-icons.css');
+@import url('../icons/feather.css');
+
+// Variables
+@import 'variables/vars';
+@import 'variables/mixins';
+@import 'variables/media';
+
+// General settings
+@import 'app/general';
+@import 'app/typography';
+
+// Components
+@import 'app/form';
+@import 'app/button';
+@import 'app/sidebar';
+@import 'app/sections';
+@import 'app/navbar';
+@import 'app/popup';
+
+// Pages, layouts
+@import 'app/cases';
+@import 'app/clients';
+@import 'app/contact';
+@import 'app/portfolio';
+@import 'app/news';
+@import 'app/single-news';
+@import 'app/single-project';
+@import 'app/testimonials';
+@import 'app/timeline';
+
+@import 'app/other';
+
