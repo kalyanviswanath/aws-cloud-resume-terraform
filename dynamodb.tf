@@ -26,7 +26,7 @@ resource "aws_dynamodb_table_item" "event_test" {
   item = <<ITEM
 {
   "ID": {"S": "1"},
-  "views":{"N":"700"}
+  "views":{"N":"1436"}
 }
 ITEM
 }
