@@ -19,7 +19,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   is_ipv6_enabled     = true
   comment             = "Some comment"
   default_root_object = "index.html"
-  aliases = ["resume.kalyanviswanath.com"]
+  aliases = ["resume.kalyanviswanath.com", "kalyanviswanath.com"]
   # AWS Managed Caching Policy (CachingDisabled)
   default_cache_behavior {
     # Using the CachingDisabled managed policy ID:
@@ -41,6 +41,7 @@ resource "aws_cloudfront_distribution" "cdn" {
      restrictions {
     geo_restriction {
       restriction_type = "none"
+      locations = []
     # restriction_type = "whitelist"
     # locations        = ["US", "CA", "GB", "DE", "IN"]
     }
