@@ -20,6 +20,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   comment             = "Some comment"
   default_root_object = "index.html"
   aliases = ["resume.kalyanviswanath.com", "kalyanviswanath.com"]
+   /*
   # AWS Managed Caching Policy (CachingDisabled)
   default_cache_behavior {
     # Using the CachingDisabled managed policy ID:
@@ -37,6 +38,17 @@ resource "aws_cloudfront_distribution" "cdn" {
     default_ttl            = 0
     max_ttl                = 0
   }
+  */
+
+  default_cache_behavior {
+    target_origin_id        = local.s3_origin_id
+    viewer_protocol_policy  = "redirect-to-https"
+    cache_policy_id         = "658327ea-f89d-4fab-a63d-7e88639e58f6" # AWS Managed CachingDisabled
+    origin_request_policy_id = "88a5eaf4-2fd4-4709-b370-b4c650ea3fcf" # AWS Managed AllViewer
+    allowed_methods         = ["GET", "HEAD"]
+    cached_methods          = ["GET", "HEAD"]
+}
+
   price_class = "PriceClass_200"
      restrictions {
     geo_restriction {
