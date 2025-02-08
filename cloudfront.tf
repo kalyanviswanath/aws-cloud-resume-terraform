@@ -17,7 +17,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "Some comment"
+  comment             = "kalyanviswanath site"
   default_root_object = "index.html"
   aliases = ["resume.kalyanviswanath.com", "kalyanviswanath.com"]
    /*
