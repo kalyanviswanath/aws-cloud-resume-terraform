@@ -135,21 +135,9 @@
 		const counter = document.querySelector(".counter-number");
 		async function updateCounter(){
 		 try {
-		   const response = await fetch(
-		     "https://iagitxlx45lst6lk7yexbb3zm40qzaal.lambda-url.us-east-1.on.aws/",
-		     { credentials: "include" }
-		   );
-		   let views;
-		   try {
-		     const data = await response.json();
-		     views = (typeof data === 'number') ? data : (data && (data.views ?? data.count));
-		   } catch(_) {
-		     // Fallback for legacy plain-text responses
-		     const txt = await response.text();
-		     const n = parseInt(txt, 10);
-		     if (Number.isFinite(n)) views = n;
-		   }
-		   if (counter && Number.isFinite(views)) counter.textContent = views;
+		   const response = await fetch("https://iagitxlx45lst6lk7yexbb3zm40qzaal.lambda-url.us-east-1.on.aws/");
+		   const data = await response.json();
+		   if (counter) counter.textContent = data;
 		 } catch(e){}
 		}
 		updateCounter();
