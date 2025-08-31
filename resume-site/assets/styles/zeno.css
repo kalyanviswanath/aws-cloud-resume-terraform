@@ -189,3 +189,21 @@ html, body {
 @keyframes pulse { 0%{ transform: scale(1); opacity: .9;} 50%{ transform: scale(1.25); opacity: .6;} 100%{ transform: scale(1); opacity: .9;} }
 .social a { color: var(--muted); margin-right: 12px; }
 .social a:hover { color: var(--text); }
+
+/* Responsive header fixes */
+@media (max-width: 640px) {
+  .topnav {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: static;
+  }
+  .brand { width: 100%; display: flex; align-items: center; justify-content: center; }
+  .brand .name { font-size: 1rem; }
+  .header-center { position: static; transform: none; }
+  .links { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .topnav .links a, .topnav .links .contact-toggle { margin-left: 0; padding: 8px 6px; font-size: 0.95rem; }
+  .counter-pill { padding: 5px 10px; }
+  .contact-dropdown { left: 50%; transform: translate(-50%, 10px); }
+}
