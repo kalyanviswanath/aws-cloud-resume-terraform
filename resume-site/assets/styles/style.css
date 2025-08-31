@@ -39,9 +39,10 @@
 @import url("../icons/feather.css");
 @import url("../icons/feathericon.css");
 @import url("../icons/feathericon.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 :root {
-  --font-family: 'Poppins', sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-base-size: 15px;
   --font-mobile-size: 14px;
   --color-heading: #FCFCFC;
@@ -198,19 +199,20 @@ iframe {
 ----------------------------------------------------------------- */
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-heading);
-  font-family: var(--font-family);
+  font-family: var(--font-heading);
   font-weight: 600;
   line-height: 1.3;
 }
 
 .title--h1 {
-  font-size: 2rem;
+  font-size: 2.25rem;
+  letter-spacing: -0.02em;
   margin-bottom: 1.0625rem;
 }
 
 @media only screen and (max-width: 580px) {
   .title--h1 {
-    font-size: 1.5rem;
+    font-size: 1.65rem;
   }
 }
 

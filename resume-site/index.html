@@ -38,154 +38,133 @@
     <!-- Styles -->
 	<link rel="stylesheet" type="text/css" href="./assets/styles/vendors/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="./assets/styles/style.css"/>
+	<link rel="stylesheet" type="text/css" href="./assets/styles/zeno.css"/>
 	
 </head>
 <body>
-    <main class="main">
-	    <div class="container gutter-top gutter-bottom">
-		    <div class="row sticky-parent">
-			    <!-- Sidebar -->
-                <aside class="col-12 col-md-12 col-xl-3">
-				    <div class="sidebar box-outer sticky-column">
-						<!-- My photo -->
-						<div class="sidebar__base-info">
-					    	<figure class="avatar-box">
-                                <img src="./assets/images/my-avatar.png" alt="Ricardo Black">
-						    </figure>
+    <div class="site-wrap">
+        <header class="topnav">
+            <div class="brand">
+                <div class="avatar"><img src="./assets/images/my-avatar.png" alt="Kalyan" class="cover" /></div>
+                <div class="name">Kalyan Viswanath</div>
+            </div>
+            <div class="header-center">
+                <div class="counter-pill"><span class="dot"></span> Visitors <span class="counter-number">—</span></div>
+            </div>
+            <nav class="links">
+                <a href="projects.html">Projects</a>
+                <a href="certifications.html">Certifications</a>
+                <span class="contact-menu">
+                  <button class="contact-toggle" aria-haspopup="true" aria-expanded="false">Contact</button>
+                  <div class="contact-dropdown" role="menu" aria-label="Contact Links">
+                    <a href="https://github.com/kalyanviswanath" target="_blank" rel="noopener" aria-label="GitHub" role="menuitem"><i class="feathericon-github"></i></a>
+                    <a href="https://www.linkedin.com/in/kalyan-viswanath" target="_blank" rel="noopener" aria-label="LinkedIn" role="menuitem"><i class="feathericon-linkedin"></i></a>
+                  </div>
+                </span>
+            </nav>
+        </header>
 
-						    <div class="text-xl-center">
-						        <h3 class="title title--h3 sidebar__name">Kalyan Viswanath <i style="color: #7749b7;"class="fe fe-check-verified"></i></h3>
-							    <div class="badge">System Administrator</div>
-								<div class="vscount">visitor count: <span class="counter-number"></span></div>
-								
-						    </div>
+        <section class="hero">
+            <div class="badge">Systems Engineer (Cloud) • Toronto</div>
+            <h1 class="title gradient-text"><span class="line-1">Hi, I’m Kalyan.</span><span class="line-2">I make IT simpler with cloud, security, and automation.</span></h1>
+            <p class="subtitle">From Intune to Azure Policy, delivering secure, compliant, and automated solutions for modern IT environments.</p>
+            <div class="cta-row">
+                <a class="btn-solid" href="projects.html">See Projects</a>
+            </div>
+        </section>
 
-							<button class="btn btn--small btn--icon-right sidebar__btn js-btn-toggle"><span>Show Contacts</span><i class="feathericon-chevron-down"></i></button>
-						</div>
+        <section class="section">
+            <h2>Featured Projects</h2>
+            <div class="grid">
+                <a class="card" href="https://github.com/kalyanviswanath/aws-cloud-resume-terraform" target="_blank" rel="noopener">
+                    <img src="./assets/images/aws_cloud_resume_challenge.jpg" alt="AWS Cloud Resume Challenge" />
+                    <div class="card-body">
+                        <div class="title">AWS Cloud Resume Challenge</div>
+                        <div class="desc">Static site on S3/CloudFront + Lambda visitor counter, provisioned with Terraform.</div>
+                        <div class="meta">AWS • Terraform • Lambda</div>
+                    </div>
+                </a>
+                <a class="card" href="https://hormonetherapy.ranoxyclinic.ca/" target="_blank" rel="noopener">
+                    <img src="./assets/images/280x204.jpg" alt="Hormone Therapy Clinic Website" />
+                    <div class="card-body">
+                        <div class="title">Hormone Therapy Clinic Website</div>
+                        <div class="desc">Designed and built a clean, fast clinic site with strong UX.</div>
+                        <div class="meta">Web • UX</div>
+                    </div>
+                </a>
+                <a class="card" href="https://kalyanviswanath.github.io/AquaBean/" target="_blank" rel="noopener">
+                    <img src="./assets/images/280x204.jpg" alt="AquaBean iOS App" />
+                    <div class="card-body">
+                        <div class="title">AquaBean (iOS App)</div>
+                        <div class="desc">Native iOS app. Add App Store/TestFlight link and screenshots.</div>
+                        <div class="meta">Mobile • iOS</div>
+                    </div>
+                </a>
+            </div>
+        </section>
 
-						<div class="sidebar__additional-info js-show">
-							<div class="separation"></div>
-		                    <ul class="details-info">
-							    <!-- Email
-							    <li class="details-info__item">
-							        <span class="box box--s2 icon-box"><i class="font-icon icon-envelope"></i></span>
-								    <div class="contacts-block__info">
-									    <span class="overhead">Email</span>
-									    <a class="text-overflow" href="mailto:kalyanviswanath@hotmail.com" title="kalyanviswanath@hotmail.com">kalyanviswanath@hotmail.com</a>
-								    </div>
-							    </li>
-								 -->
-								<!-- Location -->
-						        <li class="details-info__item">
-								    <span class="box box--s2 icon-box"><i class="font-icon icon-location"></i></span>
-								    <div class="contacts-block__info">
-									    <span class="overhead">Location</span>
-									    <span class="text-overflow" title="Toronto, Canada">Toronto, Canada</span>
-								    </div>
-							    </li>
-					        </ul>
-						    <div class="separation d-xl-none"></div>
+        <section class="section">
+            <h2>Focus & Experience</h2>
+            <div class="list">
+                <div class="item"><strong>Endpoint Management</strong>
+                    Managing devices across macOS, iOS, and Android with policies, apps, and compliance controls.
+                </div>
+                <div class="item"><strong>Azure Governance</strong>
+                    Driving Azure Policy compliance, enforcing guardrails, and maintaining secure configurations.
+                </div>
+                <div class="item"><strong>Security & Migrations</strong>
+                    Delivering secure endpoint solutions, domain migrations, and cloud adoption initiatives.
+                </div>
+                <div class="item"><strong>Support & Delivery</strong>
+                    Providing hands-on IT support and contributing to smooth sprint and project delivery.
+                </div>
+            </div>
+        </section>
 
-						    <!-- Social -->
-						    <div class="social">
-							    <a class="social__link" href="https://www.linkedin.com/in/kalyan-viswanath"><i class="feathericon-linkedin"></i></a>
-							    <a class="social__link" href="https://github.com/kalyanviswanath/aws-cloud-resume-terraform"><i class="feathericon-github"></i></a>
-						  	    <a class="social__link" href="https://www.linkedin.com/"><i class="fe fe-bookmark"></i></a>
-						    </div>
-						</div>	
-					</div>	
-		        </aside>
-		        
-				<!-- Content -->
-		        <div class="col-12 col-md-12 col-xl-9">
-				    <div class="box-outer">
-					    <!-- Menu -->
-						<div class="nav-container">
-						    <ul class="nav">
-                                <li class="nav__item"><a class="active" href="index.html">About</a></li>
-				<!--<li class="nav__item"><a href="resume.html">Resume</a></li>-->
-                                <li class="nav__item"><a href="projects.html">Projects</a></li>
-                                <li class="nav__item"><a href="certifications.html">Certifications</a></li>
-                            <!--<li class="nav__item"><a href="contact.html">Contact</a></li> -->
-                            </ul>
-						</div>
-						
-					    <!-- About -->
-						<div class="pb-0 pb-sm-2">
-		                    <h1 class="title title--h1 title__separate">About Me</h1>
-						    <p>Hey there! 🙌 I'm a passionate cloud computing enthusiast, always exploring new technologies in this exciting field. Troubleshooting and finding efficient cloud solutions are my strengths, ensuring smooth operations. Finding cloud projects and diving right in is my thing.🌩️</p>
-                            <p>This website is built as part of <a href="https://cloudresumechallenge.dev/docs/the-challenge/aws/" style="text-decoration: underline; color: #7749b7;">The AWS Cloud Resume Challenge</a>🌟, showcasing my proficiency in cloud computing and web development. Leveraging a range of AWS services, including S3, Lambda, and more. I conceptualized and constructed a robust and scalable cloud infrastructure using Terraform. The project demonstrates my expertise in infrastructure as code and automation, allowing for efficient management and replication of AWS resources while adhering to best practices. With a focus on cloud cost management and DevOps methodologies, I optimized resource allocation and leveraged serverless architecture to ensure the efficient utilization of cloud resources. As a passionate learner in the field, this website reflects my commitment to continuous improvement and pushing the boundaries of what's achievable in the cloud. 🚀</p>
-					    </div>
-						
-					    <!-- What -->
-						<h2 class="title title--h2 mt-3">Technologies & Skills</h2>
-						<div class="row">
-							<!-- Case Item -->
-							<div class="col-12 col-lg-6">
-							    <div class="case-item box box--s2 box-inner">
-									<img class="case-item__icon" src="./assets/icons/filetype-json.png" alt="" />
-									<div>
-									    <h3 class="title title--h3">Infrastructure Automation</h3>
-										<p class="case-item__caption">Proficient in leveraging Terraform and Python scripting to automate cloud infrastructure provisioning and enhance operational efficiency.</p>
-									</div>	
-								</div>
-							</div>
-								
-							<!-- Case Item -->
-							<div class="col-12 col-lg-6">
-							    <div class="case-item box box--s2 box-inner">
-									<img class="case-item__icon" src="./assets/icons/code-slash.png" alt="" />
-									<div>
-									    <h3 class="title title--h3">DevOps Implementation</h3>
-										<p class="case-item__caption">Passionate about adopting DevOps methodologies to enhance development and deployment processes, enabling continuous integration and continuous deployment (CI/CD).</p>
-									</div>
-								</div>
-							</div>
-								
-							<!-- Case Item -->
-							<div class="col-12 col-lg-6">
-								<div class="case-item box box--s2 box-inner">
-								    <img class="case-item__icon" src="./assets/icons/pc-display.png" alt="" />
-									<div>
-								        <h3 class="title title--h3">Network & System Administration</h3>
-									    <p class="case-item__caption">With over 6 years of experience in managing complex IT systems, possess expertise in configuring and maintaining servers, networking equipment, and virtualization technologies.</p>
-									</div>
-								</div>
-							</div>
-								
-							<!-- Case Item -->
-							<div class="col-12 col-lg-6">
-								<div class="case-item box box--s2 box-inner">
-									<img class="case-item__icon" src="./assets/icons/clipboard2-check.png" alt="" />
-									<div>
-									    <h3 class="title title--h3">Troubleshooting & Performance Optimization</h3>
-										<p class="case-item__caption">Skilled in troubleshooting complex IT issues and optimizing system performance to ensure efficient and reliable operations.</p>
-									</div>
-								</div>
-							</div>
-						</div>				
-						
-					</div><!-- box-outer -->
-		        </div><!-- Content -->
-			</div><!-- sticky-parent -->
-		</div><!-- container -->
-    </main>
-
-    <div class="back-to-top"></div>
+        <footer class="footer">
+            <div>© <script>document.write(new Date().getFullYear())</script> Kalyan Viswanath</div>
+            <div class="social">
+                <a href="https://www.linkedin.com/in/kalyan-viswanath" aria-label="LinkedIn">LinkedIn</a>
+                <a href="https://github.com/kalyanviswanath" aria-label="GitHub">GitHub</a>
+            </div>
+        </footer>
+    </div>
 
 	<!-- JavaScripts -->
 	<script>
 		const counter = document.querySelector(".counter-number");
 		async function updateCounter(){
-		 let response = await fetch("https://iagitxlx45lst6lk7yexbb3zm40qzaal.lambda-url.us-east-1.on.aws/");
-		 let data = await response.json();
-		 counter.innerHTML = `${data}`;
+		 try {
+		   const response = await fetch("https://iagitxlx45lst6lk7yexbb3zm40qzaal.lambda-url.us-east-1.on.aws/");
+		   const data = await response.json();
+		   if (counter) counter.textContent = data;
+		 } catch(e){}
 		}
 		updateCounter();
 	 </script> 
 	<script src="./assets/js/jquery-3.4.1.min.js"></script>
-	<script src="./assets/js/plugins.min.js"></script>
+    <script src="./assets/js/plugins.min.js"></script>
     <script src="./assets/js/common.js"></script>
+    <script>
+      // Contact dropdown: toggle on click, close on outside/ESC
+      (function(){
+        const menus = document.querySelectorAll('.contact-menu');
+        function closeAll(){ menus.forEach(m => m.classList.remove('open')); }
+        menus.forEach(menu => {
+          const btn = menu.querySelector('.contact-toggle');
+          const dropdown = menu.querySelector('.contact-dropdown');
+          if(!btn || !dropdown) return;
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = menu.classList.toggle('open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          });
+          dropdown.addEventListener('click', (e) => e.stopPropagation());
+        });
+        document.addEventListener('click', closeAll);
+        document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeAll(); });
+      })();
+    </script>
 
 </body>
 </html>
