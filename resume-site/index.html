@@ -91,8 +91,15 @@
         <nav class="bottom-links" aria-label="Primary">
             <a href="projects.html">Work</a>
             <a href="certifications.html">Certifications</a>
-            <button class="contact-shortcut" onclick="document.querySelector('.contact-toggle')?.click()">Contact</button>
+            <button class="contact-shortcut" onclick="openMobileContact()">Contact</button>
         </nav>
+        <div class="mobile-contact" id="mobile-contact" hidden>
+            <div class="sheet">
+              <a href="https://www.linkedin.com/in/kalyan-viswanath" target="_blank" rel="noopener">LinkedIn</a>
+              <a href="https://github.com/kalyanviswanath" target="_blank" rel="noopener">GitHub</a>
+              <button class="close" onclick="openMobileContact(false)">Close</button>
+            </div>
+        </div>
     </div>
     <style>
     #site-tech-bg{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:0;filter:blur(1.2px) opacity(.72)}
@@ -113,6 +120,10 @@
       .home .bottom-links{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-around;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px);background:rgba(14,15,18,.72);backdrop-filter:saturate(120%) blur(8px);border-top:1px solid var(--border);z-index:3}
       .home .bottom-links a,.home .bottom-links button{appearance:none;background:transparent;border:0;color:#cfd3d9;font-weight:600;padding:8px 10px;border-radius:10px}
       .home .bottom-links a:hover,.home .bottom-links button:hover{color:#fff;background:rgba(255,255,255,.06)}
+      .home .mobile-contact{position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:4}
+      .home .mobile-contact .sheet{width:100%;background:var(--surface);border-top:1px solid var(--border);border-radius:12px 12px 0 0;padding:16px 20px 20px;display:flex;gap:16px;justify-content:space-around}
+      .home .mobile-contact a,.home .mobile-contact .close{appearance:none;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--text);padding:10px 12px;font-weight:600}
+      .home .mobile-contact .close{border-color:rgba(255,255,255,.15)}
     }
     </style>
 
@@ -133,6 +144,17 @@
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/cmdk.js"></script>
     <script>
+      function openMobileContact(show){
+        const el = document.getElementById('mobile-contact');
+        if(!el) return;
+        const visible = show === undefined ? el.hasAttribute('hidden') : show;
+        if(visible){
+          el.removeAttribute('hidden');
+          el.addEventListener('click', (e) => { if(e.target === el) el.setAttribute('hidden',''); }, { once: true });
+        } else {
+          el.setAttribute('hidden','');
+        }
+      }
       // Contact dropdown: toggle on click, close on outside/ESC
       (function(){
         const menus = document.querySelectorAll('.contact-menu');

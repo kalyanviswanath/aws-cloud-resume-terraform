@@ -24,6 +24,9 @@
 <body>
   
   <div class="site-wrap">
+    <div class="mobile-top">
+      <div class="counter-pill"><span class="dot"></span> Visitors <span class="counter-number">—</span></div>
+    </div>
     <header class="topnav">
       <div class="brand">
         <div class="avatar"><img src="./assets/images/my-avatar.png" alt="Kalyan" class="cover" /></div>
@@ -99,8 +102,37 @@
       </div>
     </footer>
   </div>
+  <nav class="bottom-links" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="projects.html">Work</a>
+    <a href="certifications.html">Certifications</a>
+    <button class="contact-shortcut" onclick="openMobileContact(true)">Contact</button>
+  </nav>
+  <div class="mobile-contact" id="mobile-contact">
+    <div class="sheet">
+      <a href="https://www.linkedin.com/in/kalyan-viswanath" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/kalyanviswanath" target="_blank" rel="noopener">GitHub</a>
+      <button class="close" onclick="openMobileContact(false)">Close</button>
+    </div>
+  </div>
   <style>
     .footer{position:sticky;top:100vh}
+    .bottom-links{display:none}
+    .mobile-top{display:none}
+    .mobile-contact{display:none}
+    @media (min-width:641px){ .topnav{display:flex} }
+    @media (max-width:640px){
+      .topnav{display:none}
+      .footer{display:none}
+      .mobile-top{position:fixed;left:0;right:0;top:12px;display:flex;justify-content:center;z-index:2}
+      .bottom-links{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-around;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px);background:rgba(14,15,18,.72);backdrop-filter:saturate(120%) blur(8px);border-top:1px solid var(--border);z-index:3}
+      .bottom-links a,.bottom-links button{appearance:none;background:transparent;border:0;color:#cfd3d9;font-weight:600;padding:8px 10px;border-radius:10px}
+      .bottom-links a:hover,.bottom-links button:hover{color:#fff;background:rgba(255,255,255,.06)}
+      .mobile-contact{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:4}
+      .mobile-contact.open{display:flex}
+      .mobile-contact .sheet{width:100%;background:var(--surface);border-top:1px solid var(--border);border-radius:12px 12px 0 0;padding:16px 20px 20px;display:flex;gap:16px;justify-content:space-around}
+      .mobile-contact a,.mobile-contact .close{appearance:none;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--text);padding:10px 12px;font-weight:600}
+    }
   </style>
 
   <script src="./assets/js/jquery-3.4.1.min.js"></script>
@@ -227,6 +259,26 @@
     }, {passive:true});
     init();
   })();
+  </script>
+  <script>
+    (function(){
+      const el = document.querySelector('#mobile-contact');
+      window.openMobileContact = function(show){ if(!el) return; if(show){ el.classList.add('open'); } else { el.classList.remove('open'); } }
+      // Close when tapping backdrop
+      el && el.addEventListener('click', (e) => { if(e.target === el) el.classList.remove('open'); });
+    })();
+    // Visitors counter (mobile top)
+    (function(){
+      const counter = document.querySelector('.counter-number');
+      async function updateCounter(){
+        try{
+          const response = await fetch('https://iagitxlx45lst6lk7yexbb3zm40qzaal.lambda-url.us-east-1.on.aws/');
+          const data = await response.json();
+          if(counter) counter.textContent = data;
+        }catch(e){}
+      }
+      updateCounter();
+    })();
   </script>
 </body>
 </html>
