@@ -15,12 +15,13 @@ html, body {
   color: var(--text);
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
+  height: 100%;
 }
 
 .site-wrap {
   max-width: 980px;
   margin: 0 auto;
-  padding: 32px 20px 64px;
+  padding: 32px 20px 16px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -179,7 +180,7 @@ html, body {
 .list .item strong { display: block; margin-bottom: 4px; }
 
 /* Footer */
-.footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.footer { margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px); }
 .counter-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background:
   linear-gradient(135deg, rgba(45,168,255,0.18), rgba(45,168,255,0.06)); border: 1px solid rgba(45,168,255,0.45);
   box-shadow: 0 0 0 1px rgba(45,168,255,0.08) inset, 0 8px 24px rgba(45,168,255,0.15);

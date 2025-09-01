@@ -1,0 +1,17 @@
+{
+  "name": "Kalyan Viswanath",
+  "short_name": "KalyanV",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0e0f12",
+  "theme_color": "#0e0f12",
+  "icons": [
+    { "src": "assets/images/favicons/favicon.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/images/favicons/apple-touch-icon-144x144.png", "sizes": "144x144", "type": "image/png" },
+    { "src": "assets/images/favicons/apple-touch-icon-114x114.png", "sizes": "114x114", "type": "image/png" },
+    { "src": "assets/images/favicons/apple-touch-icon-72x72.png", "sizes": "72x72", "type": "image/png" },
+    { "src": "assets/images/favicons/apple-touch-icon-57x57.png", "sizes": "57x57", "type": "image/png" }
+  ]
+}
+
+
