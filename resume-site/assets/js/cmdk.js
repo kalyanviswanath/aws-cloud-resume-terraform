@@ -6,7 +6,7 @@
     overlay.innerHTML = `
       <div class="cmdk" role="dialog" aria-modal="true" aria-label="Command Palette">
         <div class="bar">
-          <input type="text" placeholder="Type a command or search..." aria-label="Command input" />
+          <input type="text" placeholder="Type a keyword to search…" aria-label="Command input" />
           <span class="hint"><span class="kbd">Esc</span> to close</span>
         </div>
         <div class="list"></div>
@@ -39,6 +39,7 @@
     {label: 'Open project: AWS Cloud Resume', action: () => { location.href = 'projects.html#work-aws-resume'; }, kbd: ''},
     {label: 'Open project: Hormone Therapy Site', action: () => { location.href = 'projects.html#work-hormone'; }, kbd: ''},
     {label: 'Jump to: Focus & Experience', action: () => { location.href = 'projects.html#focus'; }, kbd: ''},
+  
     // search anchors and headings across the page
     ...Array.from(document.querySelectorAll('a, .title, h1, h2, h3, h4, h5'))
       .map(el => {
