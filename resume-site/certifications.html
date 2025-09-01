@@ -15,6 +15,7 @@
   <link rel="stylesheet" type="text/css" href="./assets/styles/vendors/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="./assets/styles/style.css"/>
   <link rel="stylesheet" type="text/css" href="./assets/styles/zeno.css"/>
+  <link rel="stylesheet" type="text/css" href="./assets/styles/cmdk.css"/>
 </head>
 <body>
   <div class="site-wrap">
@@ -25,7 +26,7 @@
       </div>
       <nav class="links">
         <a href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
+        <a href="projects.html">Work</a>
         <a href="certifications.html">Certifications</a>
         <span class="contact-menu">
           <button class="contact-toggle" aria-haspopup="true" aria-expanded="false">Contact</button>
@@ -75,10 +76,15 @@
       </div>
     </footer>
   </div>
+  <style>
+    .site-wrap{min-height:100vh;display:flex;flex-direction:column}
+    .footer{margin-top:auto}
+  </style>
 
   <script src="./assets/js/jquery-3.4.1.min.js"></script>
   <script src="./assets/js/plugins.min.js"></script>
   <script src="./assets/js/common.js"></script>
+  <script src="./assets/js/cmdk.js"></script>
   <script>
     (function(){
       const menus = document.querySelectorAll('.contact-menu');
@@ -98,5 +104,6 @@
       document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeAll(); });
     })();
   </script>
+  
 </body>
 </html>

@@ -1,0 +1,29 @@
+/* Command Palette styles */
+.cmdk-overlay{position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.45);backdrop-filter:saturate(130%) blur(2px);z-index:10;padding-top:18vh}
+.cmdk-overlay.open{display:flex}
+.cmdk{width:min(720px,92vw);background:var(--surface);border:1px solid var(--border);box-shadow:0 24px 80px rgba(0,0,0,.55);border-radius:14px;overflow:hidden}
+.cmdk .bar{display:flex;align-items:center;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.cmdk input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:16px}
+.cmdk .hint{color:var(--muted);font-size:12px}
+.cmdk .list{max-height:52vh;overflow:auto}
+.cmdk .item{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;color:var(--text)}
+.cmdk .item:hover{background:rgba(45,168,255,.08)}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;padding:2px 6px;border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;color:var(--text);background:#202734}
+
+/* Homepage hero layout like Zeno Rocha */
+.hero{padding:80px 16px 24px;text-align:center}
+.hero .title{font-size:36px;line-height:1.1;margin:14px 0;color:#fff}
+.hero .badge{display:inline-block;margin-bottom:10px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);font-weight:600;font-size:14px}
+.hero .subtitle{color:#a8bbcc;margin:8px 0 16px}
+.cmdk-hint{color:#8fa6bb;margin-top:6px}
+.cmdk-hint .kbd{background:#202734;color:#d7ecff;transition:box-shadow .2s ease, transform .2s ease}
+.cmdk-hint:hover .kbd{box-shadow:0 0 0 3px rgba(0,229,255,.25), 0 6px 20px rgba(0,229,255,.25); transform:translateY(-1px)}
+@media (min-width:768px){
+  .hero{padding:120px 16px 40px}
+  .hero .title{font-size:52px}
+}
+
+/* Dim/blur the page when palette is open */
+body.cmdk-open{overflow:hidden}
+body.cmdk-open .site-wrap{filter:blur(3px) brightness(.6); pointer-events:none; transition:filter .15s ease}
+

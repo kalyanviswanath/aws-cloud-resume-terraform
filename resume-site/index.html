@@ -39,9 +39,11 @@
 	<link rel="stylesheet" type="text/css" href="./assets/styles/vendors/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="./assets/styles/style.css"/>
 	<link rel="stylesheet" type="text/css" href="./assets/styles/zeno.css"/>
+	<link rel="stylesheet" type="text/css" href="./assets/styles/cmdk.css"/>
 	
 </head>
 <body>
+    <canvas id="site-tech-bg" aria-hidden="true"></canvas>
     <div class="site-wrap">
         <header class="topnav">
             <div class="brand">
@@ -52,7 +54,7 @@
                 <div class="counter-pill"><span class="dot"></span> Visitors <span class="counter-number">—</span></div>
             </div>
             <nav class="links">
-                <a href="projects.html">Projects</a>
+                <a href="projects.html">Work</a>
                 <a href="certifications.html">Certifications</a>
                 <span class="contact-menu">
                   <button class="contact-toggle" aria-haspopup="true" aria-expanded="false">Contact</button>
@@ -65,61 +67,15 @@
         </header>
 
         <section class="hero">
+            <h4 class="title">Kalyan Viswanath</h4>
             <div class="badge">Systems Engineer (Cloud) • Toronto</div>
-            <h1 class="title gradient-text"><span class="line-1">Hi, I’m Kalyan.</span><span class="line-2">Learning every day, building along the way.</span></h1>
-            <p class="subtitle">Simplifying IT with cloud and automation.</p>
-            <div class="cta-row">
-                <a class="btn-solid" href="projects.html">See Projects</a>
-            </div>
+            <p class="subtitle">Learning every day, building along the way.</p>
+            <p class="cmdk-hint" onclick="window.openCommandPalette && window.openCommandPalette()" title="Open command palette">
+              <span class="gradient-text">Press</span> <span class="kbd os-key">⌘</span> <span class="kbd">K</span> <span class="gradient-text">to start →</span>
+            </p>
         </section>
 
-        <section class="section">
-            <h2>Featured Projects</h2>
-            <div class="grid">
-                <a class="card" href="https://github.com/kalyanviswanath/aws-cloud-resume-terraform" target="_blank" rel="noopener">
-                    <img src="./assets/images/aws_cloud_resume_challenge.jpg" alt="AWS Cloud Resume Challenge" />
-                    <div class="card-body">
-                        <div class="title">AWS Cloud Resume Challenge</div>
-                        <div class="desc">Static site on S3/CloudFront + Lambda visitor counter, provisioned with Terraform.</div>
-                        <div class="meta">AWS • Terraform • Lambda</div>
-                    </div>
-                </a>
-                <a class="card" href="https://hormonetherapy.ranoxyclinic.ca/" target="_blank" rel="noopener">
-                    <img src="./assets/images/hormone280x204.png" alt="Hormone Therapy Clinic Website" />
-                    <div class="card-body">
-                        <div class="title">Hormone Therapy Clinic Website</div>
-                        <div class="desc">Designed and built a clean, fast clinic site with strong UX.</div>
-                        <div class="meta">Web • UX</div>
-                    </div>
-                </a>
-                <a class="card" href="https://kalyanviswanath.github.io/AquaBean/" target="_blank" rel="noopener">
-                    <img src="./assets/images/aquabean280x204.png" alt="AquaBean iOS App" />
-                    <div class="card-body">
-                        <div class="title">AquaBean (iOS App)</div>
-                        <div class="desc">Simple daily water tracker for iPhone — one‑tap logging, hydration ring, streaks, and smart reminders.</div>
-                        <div class="meta">Mobile • iOS</div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2>Focus & Experience</h2>
-            <div class="list">
-                <div class="item"><strong>Endpoint Management</strong>
-                    Managing devices across macOS, iOS, and Android with policies, apps, and compliance controls.
-                </div>
-                <div class="item"><strong>Azure Governance</strong>
-                    Driving Azure Policy compliance, enforcing guardrails, and maintaining secure configurations.
-                </div>
-                <div class="item"><strong>Security & Migrations</strong>
-                    Delivering secure endpoint solutions, domain migrations, and cloud adoption initiatives.
-                </div>
-                <div class="item"><strong>Support & Delivery</strong>
-                    Providing hands-on IT support and contributing to smooth sprint and project delivery.
-                </div>
-            </div>
-        </section>
+        
 
         <footer class="footer">
             <div>© <script>document.write(new Date().getFullYear())</script> Kalyan Viswanath</div>
@@ -129,6 +85,15 @@
             </div>
         </footer>
     </div>
+    <style>
+    #site-tech-bg{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:0;filter:blur(1.2px) opacity(.72)}
+    .site-wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+    .footer{margin-top:auto}
+    .hero .title{font-size:28px}
+    @media (min-width:768px){ .hero .title{font-size:40px} }
+    .cmdk-hint{cursor:pointer; display:inline-flex; align-items:center; gap:6px}
+    .cmdk-hint .kbd{background:#202734;color:#d7ecff}
+    </style>
 
 	<!-- JavaScripts -->
 	<script>
@@ -145,6 +110,7 @@
 	<script src="./assets/js/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/plugins.min.js"></script>
     <script src="./assets/js/common.js"></script>
+    <script src="./assets/js/cmdk.js"></script>
     <script>
       // Contact dropdown: toggle on click, close on outside/ESC
       (function(){
@@ -163,6 +129,108 @@
         });
         document.addEventListener('click', closeAll);
         document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeAll(); });
+      })();
+    </script>
+    <script>
+      (function(){
+        const canvas = document.getElementById('site-tech-bg');
+        if(!canvas) return;
+        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const ctx = canvas.getContext('2d');
+        let width = 0, height = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
+        let mouseX = 0.5, mouseY = 0.5;
+        const maxParallax = 80;
+        const items = [];
+        const iconSrcs = [
+          './assets/icons/icon-dev.svg',
+          './assets/icons/icon-app.svg',
+          './assets/icons/icon-design.svg',
+          './assets/icons/icon-education.svg',
+          './assets/icons/icon-experience.svg',
+          './assets/icons/icon-user.svg',
+          './assets/icons/icon-like.svg',
+          './assets/icons/icon-calendar.svg'
+        ];
+        const icons = iconSrcs.map(src => { const img = new Image(); img.src = src; return img; });
+        function resize(){
+          width = Math.max(1, Math.floor(window.innerWidth));
+          height = Math.max(1, Math.floor(window.innerHeight));
+          canvas.width = Math.floor(width * dpr);
+          canvas.height = Math.floor(height * dpr);
+          canvas.style.width = width + 'px';
+          canvas.style.height = height + 'px';
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        function spawn(count){
+          for(let i=0;i<count;i++){
+            items.push({
+              x: Math.random()*width,
+              y: Math.random()*height,
+              z: 0.25 + Math.random()*0.75,
+              size: 18 + Math.random()*28,
+              speedX: (Math.random()-0.5)*0.25,
+              speedY: (Math.random()-0.5)*0.25,
+              rot: Math.random()*Math.PI*2,
+              rotSpeed: (Math.random()-0.5)*0.005,
+              img: icons[Math.floor(Math.random()*icons.length)]
+            });
+          }
+        }
+        function update(){
+          for(const it of items){
+            it.x += it.speedX * (0.5 + it.z);
+            it.y += it.speedY * (0.5 + it.z);
+            it.rot += it.rotSpeed;
+            if(it.x < -50) it.x = width+50; if(it.x > width+50) it.x = -50;
+            if(it.y < -50) it.y = height+50; if(it.y > height+50) it.y = -50;
+          }
+        }
+        function draw(){
+          ctx.clearRect(0,0,width,height);
+          const offsetX = (mouseX-0.5) * maxParallax;
+          const offsetY = (mouseY-0.5) * maxParallax;
+          for(const it of items){
+            const parallaxX = -offsetX * (1 - it.z);
+            const parallaxY = -offsetY * (1 - it.z);
+            const x = it.x + parallaxX;
+            const y = it.y + parallaxY;
+            const s = it.size * it.z;
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(it.rot);
+            ctx.globalAlpha = 0.15 + 0.55*it.z;
+            if(it.img && it.img.complete){
+              ctx.drawImage(it.img, -s/2, -s/2, s, s);
+            } else {
+              const r = s*0.2; ctx.fillStyle = 'rgba(0, 170, 255, 0.5)';
+              roundRect(ctx, -s/2, -s/2, s, s, r); ctx.fill();
+            }
+            ctx.restore();
+          }
+        }
+        function roundRect(ctx, x, y, w, h, r){
+          r = Math.min(r, w/2, h/2);
+          ctx.beginPath();
+          ctx.moveTo(x+r, y);
+          ctx.arcTo(x+w, y, x+w, y+h, r);
+          ctx.arcTo(x+w, y+h, x, y+h, r);
+          ctx.arcTo(x, y+h, x, y, r);
+          ctx.arcTo(x, y, x+w, y, r);
+          ctx.closePath();
+        }
+        function tick(){ update(); draw(); requestAnimationFrame(tick); }
+        function init(){ resize(); items.length = 0; spawn(Math.max(50, Math.floor(width*height/16000))); tick(); }
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', e => {
+          mouseX = e.clientX / Math.max(1, window.innerWidth);
+          mouseY = e.clientY / Math.max(1, window.innerHeight);
+        });
+        window.addEventListener('touchmove', e => {
+          const t = e.touches[0]; if(!t) return;
+          mouseX = t.clientX / Math.max(1, window.innerWidth);
+          mouseY = t.clientY / Math.max(1, window.innerHeight);
+        }, {passive:true});
+        init();
       })();
     </script>
 
