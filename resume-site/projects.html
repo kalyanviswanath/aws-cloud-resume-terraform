@@ -129,6 +129,9 @@
     .bottom-links{display:none}
     .mobile-top{display:none}
     .mobile-contact{display:none}
+    /* Ensure Work section is visible above visual layers */
+    #work{ position: relative; z-index: 1; padding-top: 24px; }
+    #work .grid{ display: grid !important; opacity: 1 !important; visibility: visible !important; }
     @media (min-width:641px){ .topnav{display:flex} }
     @media (max-width:640px){
       .topnav{display:none}
