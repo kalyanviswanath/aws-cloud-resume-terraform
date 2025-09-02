@@ -58,6 +58,11 @@ body:not(.home)::before{
   .intro-sub{ opacity:.8 }
 }
 
+/* Avoid overlapping bottom nav on mobile */
+@media (max-width:640px){
+  .sound-toggle{ top: calc(env(safe-area-inset-top, 0px) + 12px); right: 14px; left: auto; bottom: auto; z-index: 4; }
+}
+
 /* Section layout defaults (no scroll snap on home) */
 /* Keep normal document flow so header/footer are visible */
 .section{ padding: 48px 16px; }
