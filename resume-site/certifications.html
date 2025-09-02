@@ -18,10 +18,19 @@
   <link rel="stylesheet" type="text/css" href="./assets/styles/vendors/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="./assets/styles/style.css"/>
   <link rel="stylesheet" type="text/css" href="./assets/styles/zeno.css"/>
+  <link rel="stylesheet" type="text/css" href="./assets/styles/experience.css"/>
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="stylesheet" type="text/css" href="./assets/styles/cmdk.css"/>
 </head>
 <body>
+  <button class="sound-toggle" id="sound-toggle" aria-label="Toggle sound" title="Toggle sound" data-state="off">
+    <svg class="sound-icon" width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path class="spk" d="M2 7h3l4-3v10l-4-3H2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path class="wave wave-1" d="M12 5c1.5 1.2 1.5 6.8 0 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <path class="wave wave-2" d="M15 3c3 2.5 3 11 0 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <path class="slash" d="M1 17L21 1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+  </button>
   <div class="site-wrap">
     <div class="mobile-top">
       <div class="counter-pill"><span class="dot"></span> Visitors <span class="counter-number">—</span></div>
@@ -120,6 +129,7 @@
   <script src="./assets/js/plugins.min.js"></script>
   <script src="./assets/js/common.js"></script>
   <script src="./assets/js/cmdk.js"></script>
+  <script src="./assets/js/experience.js" defer></script>
   <script>
     (function(){
       const menus = document.querySelectorAll('.contact-menu');

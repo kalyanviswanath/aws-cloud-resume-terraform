@@ -7,6 +7,10 @@
 
 html, body { background: var(--fx-bg); }
 
+/* Ensure content sits above background layers on all pages */
+.site-wrap{ position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
+.footer{ margin-top: auto; }
+
 /* Optional active link style (no sticky header) */
 .topnav .links a.active{ color:#fff }
 .bottom-links a.active{ color:#fff; background: rgba(255,255,255,.08) }
@@ -34,6 +38,20 @@ body:after{ content:""; position:fixed; inset:-10px; pointer-events:none; z-inde
   radial-gradient(1200px 800px at 50% -200px, rgba(26,163,255,.08), transparent 60%),
   radial-gradient(1200px 800px at -100px 120%, rgba(106,92,255,.06), transparent 60%),
   radial-gradient(1200px 800px at 110% 110%, rgba(0,0,0,.25), transparent 50%);
+}
+
+/* Subpages: subtle animated spotlight (no particles) */
+body:not(.home)::before{
+  content:""; position:fixed; inset:-10px; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(800px 600px at var(--sx, 60%) var(--sy, 35%), rgba(26,163,255,.09), transparent 60%),
+    radial-gradient(1000px 800px at 30% 120%, rgba(106,92,255,.05), transparent 60%);
+  animation: spotSweep 20s ease-in-out infinite alternate;
+}
+@keyframes spotSweep{
+  0%{ --sx: 60%; --sy: 35%; }
+  50%{ --sx: 48%; --sy: 40%; }
+  100%{ --sx: 65%; --sy: 32%; }
 }
 
 @media (prefers-reduced-motion: reduce){

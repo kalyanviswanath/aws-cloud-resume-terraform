@@ -1,3 +1,100 @@
+// Shared lightweight ambience + canvas background
+(function(){
+  // ---------------- Audio ----------------
+  let audioCtx, osc, gain, isOn = false;
+  const btn = document.getElementById('sound-toggle');
+  const saved = (typeof localStorage !== 'undefined') && localStorage.getItem('kv_sound') === 'on';
+
+  function ensureAudio(){
+    if(audioCtx) return;
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    audioCtx = new Ctx();
+    osc = audioCtx.createOscillator();
+    gain = audioCtx.createGain();
+    // soft ambient tone
+    osc.type = 'sine';
+    osc.frequency.value = 220;
+    gain.gain.value = 0;
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start();
+  }
+  function setSound(on){
+    ensureAudio(); if(!gain) return;
+    isOn = !!on; if(btn){ btn.dataset.state = isOn ? 'on' : 'off'; }
+    const t = audioCtx.currentTime;
+    gain.gain.cancelScheduledValues(t);
+    gain.gain.linearRampToValueAtTime(isOn ? 0.025 : 0.0, t + 0.15);
+    try{ localStorage.setItem('kv_sound', isOn ? 'on' : 'off'); }catch(_){ }
+  }
+  if(btn){
+    btn.addEventListener('click', async () => {
+      ensureAudio();
+      if(audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
+      setSound(!isOn);
+    });
+  }
+  // If previously on, wait for first interaction to resume
+  if(saved){
+    const kick = async () => { ensureAudio(); if(audioCtx && audioCtx.state==='suspended') await audioCtx.resume(); setSound(true); cleanup(); };
+    const cleanup = () => { ['pointerdown','keydown','wheel','touchstart'].forEach(t=>window.removeEventListener(t,kick)); };
+    ['pointerdown','keydown','wheel','touchstart'].forEach(t=>window.addEventListener(t,kick,{passive:true, once:false}));
+  }
+
+  // Intro gate support (home only)
+  const gate = document.getElementById('intro-gate');
+  const gateBtn = document.getElementById('intro-btn');
+  if(gateBtn){
+    gateBtn.addEventListener('click', async () => {
+      ensureAudio(); if(audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
+      if(saved) setSound(true);
+      gate && gate.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  // ---------------- Canvas backdrop ----------------
+  const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('hero-canvas');
+  if(!canvas || prefersReduce) return;
+  const ctx = canvas.getContext('2d');
+  let width=0,height=0,dpr=Math.max(1, window.devicePixelRatio||1);
+  const dots=[]; let mx=0.5,my=0.5;
+  function resize(){
+    width = Math.floor(window.innerWidth); height = Math.floor(window.innerHeight);
+    canvas.width = Math.floor(width*dpr); canvas.height = Math.floor(height*dpr);
+    canvas.style.width = width+'px'; canvas.style.height = height+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(dots.length === 0){
+      const n = Math.max(160, Math.floor(width*height/12000));
+      for(let i=0;i<n;i++) dots.push(spawn());
+    }
+  }
+  function spawn(){
+    return { x:Math.random()*width, y:Math.random()*height, z:0.3+Math.random()*1.0, s:1+Math.random()*2.5, vx:(Math.random()-0.5)*0.35, vy:(Math.random()-0.5)*0.35 };
+  }
+  function step(){
+    ctx.clearRect(0,0,width,height);
+    const ox=(mx-0.5)*36, oy=(my-0.5)*36;
+    // vignette background
+    const g = ctx.createRadialGradient(width/2, height/2, Math.min(width,height)*0.1, width/2, height/2, Math.max(width,height)*0.8);
+    g.addColorStop(0,'rgba(0,40,80,0.25)'); g.addColorStop(1,'rgba(0,0,0,0.0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,width,height);
+    for(const p of dots){
+      p.x+=p.vx*(0.6+p.z); p.y+=p.vy*(0.6+p.z);
+      if(p.x<-10) p.x=width+10; if(p.x>width+10) p.x=-10;
+      if(p.y<-10) p.y=height+10; if(p.y>height+10) p.y=-10;
+      const x=p.x-ox*(1-p.z), y=p.y-oy*(1-p.z);
+      ctx.beginPath(); ctx.fillStyle=`rgba(80,170,255,${0.12+0.5*p.z})`;
+      ctx.arc(x,y,p.s*p.z,0,Math.PI*2); ctx.fill();
+    }
+    requestAnimationFrame(step);
+  }
+  window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', e=>{ mx = e.clientX/Math.max(1,window.innerWidth); my=e.clientY/Math.max(1,window.innerHeight); });
+  window.addEventListener('touchmove', e=>{ const t=e.touches[0]; if(t){ mx=t.clientX/innerWidth; my=t.clientY/innerHeight; } }, {passive:true});
+  resize(); step();
+})();
+
 /*
   Fullscreen animated background + ambient soundscape
   - Respects prefers-reduced-motion
@@ -7,15 +104,14 @@
 (function(){
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.getElementById('hero-canvas');
-  if(!canvas) return;
 
   const gate = document.getElementById('intro-gate');
   const gateBtn = document.getElementById('intro-btn');
   const soundToggle = document.getElementById('sound-toggle');
   const hero = document.querySelector('.hero');
 
-  // Background particles (2D)
-  const ctx = canvas.getContext('2d');
+  // Background particles (2D) — only if canvas exists (home page)
+  const ctx = canvas ? canvas.getContext('2d') : null;
   let width=0, height=0, dpr=Math.min(2, window.devicePixelRatio||1);
   let time=0, rafId=0;
   const pointer={x:0.5,y:0.5};
@@ -25,14 +121,15 @@
   function resize(){
     width = Math.max(1, Math.floor(window.innerWidth));
     height = Math.max(1, Math.floor(window.innerHeight));
-    canvas.width = Math.floor(width*dpr);
-    canvas.height = Math.floor(height*dpr);
-    canvas.style.width = width+'px'; canvas.style.height = height+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    const target = Math.max(90, Math.floor(width*height*DENSITY));
-    while(particles.length < target) spawn(1);
-    particles.length = target;
-    // nothing else needed here for layout
+    if(canvas && ctx){
+      canvas.width = Math.floor(width*dpr);
+      canvas.height = Math.floor(height*dpr);
+      canvas.style.width = width+'px'; canvas.style.height = height+'px';
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      const target = Math.max(90, Math.floor(width*height*DENSITY));
+      while(particles.length < target) spawn(1);
+      particles.length = target;
+    }
   }
   function rand(a,b){ return a + Math.random()*(b-a); }
   function spawn(n){
@@ -50,7 +147,7 @@
   function update(){
     const px=(pointer.x-0.5)*120, py=(pointer.y-0.5)*120;
     for(const p of particles){
-      const f=field(p.x,p.y,time*0.001);
+    const f=field(p.x,p.y,time*0.001);
       p.vx+=f.x*(reduceMotion?0.12:0.22); p.vy+=f.y*(reduceMotion?0.12:0.22);
       p.vx+=(px-(p.x-width/2))*0.00002*p.p; p.vy+=(py-(p.y-height/2))*0.00002*p.p;
       p.vx*=0.985; p.vy*=0.985; p.x+=p.vx*(0.6+p.p*0.6); p.y+=p.vy*(0.6+p.p*0.6);
@@ -59,6 +156,7 @@
     }
   }
   function draw(){
+    if(!ctx) return; // no canvas on subpages
     ctx.clearRect(0,0,width,height);
     // subtle wash
     const g=ctx.createRadialGradient(width*0.6,height*0.35,30,width*0.6,height*0.35,Math.max(width,height));
@@ -75,15 +173,17 @@
     ctx.globalCompositeOperation='source-over';
   }
   let last=performance.now();
-  function loop(now){ const dt=Math.min(64,now-last); last=now; time+=dt; update(); draw(); rafId=requestAnimationFrame(loop); }
+  function loop(now){ const dt=Math.min(64,now-last); last=now; time+=dt; if(ctx){ update(); draw(); } rafId=requestAnimationFrame(loop); }
 
   // Pointer
   function onMove(e){
     if(e.touches&&e.touches[0]){ pointer.x=e.touches[0].clientX/Math.max(1,window.innerWidth); pointer.y=e.touches[0].clientY/Math.max(1,window.innerHeight); }
     else { pointer.x=e.clientX/Math.max(1,window.innerWidth); pointer.y=e.clientY/Math.max(1,window.innerHeight); }
   }
-  window.addEventListener('mousemove', onMove, {passive:true});
-  window.addEventListener('touchmove', onMove, {passive:true});
+  if(canvas){
+    window.addEventListener('mousemove', onMove, {passive:true});
+    window.addEventListener('touchmove', onMove, {passive:true});
+  }
 
   // Section smoke/zoom transitions (no 3D transforms)
   const sectionNodes = Array.from(document.querySelectorAll('.hero, .section'));
@@ -111,6 +211,8 @@
 
   // Audio graph (pad + air), with reliable mute/unmute
   const audio = { ctx:null, master:null, filter:null, drones:[], noise:null, sfx:null, running:false, muted:true };
+  const LS_ENTERED = 'kv_entered';
+  const LS_SOUND = 'kv_sound';
   function createNoiseBuffer(ctx){
     const len = 2 * ctx.sampleRate; const b = ctx.createBuffer(1, len, ctx.sampleRate); const d = b.getChannelData(0);
     for(let i=0;i<len;i++){ d[i] = (Math.random()*2-1) * 0.6; } return b;
@@ -154,13 +256,20 @@
     if(gate) gate.setAttribute('aria-hidden','true');
     startAnim();
     document.body && document.body.classList.add('ui-reveal');
-    if(!reduceMotion){ buildAudio(); setMuted(false); if(soundToggle){ soundToggle.dataset.state='on'; soundToggle.setAttribute('aria-pressed','true'); } playWhoosh(); }
+    try{ localStorage.setItem(LS_ENTERED, '1'); }catch(e){}
+    if(!reduceMotion){
+      buildAudio(); setMuted(false);
+      if(soundToggle){ soundToggle.dataset.state='on'; soundToggle.setAttribute('aria-pressed','true'); }
+      try{ localStorage.setItem(LS_SOUND, 'on'); }catch(e){}
+      playWhoosh();
+    }
   }
   function toggleSound(){
     if(!audio.running){ buildAudio(); setMuted(false); soundToggle.dataset.state='on'; return; }
     const willMute = soundToggle.dataset.state !== 'off' && soundToggle.dataset.state === 'on';
     if(willMute){ setMuted(true); soundToggle.dataset.state='off'; soundToggle.setAttribute('aria-pressed','false'); }
     else { setMuted(false); soundToggle.dataset.state='on'; soundToggle.setAttribute('aria-pressed','true'); }
+    try{ localStorage.setItem(LS_SOUND, soundToggle.dataset.state); }catch(e){}
   }
 
   if(gateBtn) gateBtn.addEventListener('click', enter);
@@ -169,5 +278,23 @@
 
   // Start
   function startAnim(){ cancelAnimationFrame(rafId); resize(); last=performance.now(); rafId=requestAnimationFrame(loop); }
-  if(reduceMotion){ if(gate) gate.setAttribute('aria-hidden','true'); startAnim(); }
+  // If user already entered once, do not show the gate again on home
+  const enteredBefore = (()=>{ try{ return localStorage.getItem(LS_ENTERED) === '1'; }catch(e){ return false; } })();
+  const savedSound = (()=>{ try{ return localStorage.getItem(LS_SOUND) || 'off'; }catch(e){ return 'off'; } })();
+  if(document.body && document.body.classList.contains('home')){
+    if(enteredBefore && gate){ gate.setAttribute('aria-hidden','true'); document.body.classList.add('ui-reveal'); }
+  }
+  // Initialize toggle state from storage
+  if(soundToggle){ soundToggle.dataset.state = savedSound; soundToggle.setAttribute('aria-pressed', savedSound === 'on' ? 'true' : 'false'); }
+  // If motion reduced, skip canvas anim
+  if(reduceMotion){ if(gate) gate.setAttribute('aria-hidden','true'); document.body && document.body.classList.add('ui-reveal'); }
+  // Attempt to resume audio if previously on; attach a one-time user-gesture fallback
+  function resumeIfAllowed(){ if(savedSound === 'on'){ buildAudio(); setMuted(false); } cleanupGesture(); }
+  function cleanupGesture(){
+    ['pointerdown','keydown','wheel','touchstart','click'].forEach(t=>window.removeEventListener(t, resumeIfAllowed, true));
+  }
+  if(savedSound === 'on'){
+    ['pointerdown','keydown','wheel','touchstart','click'].forEach(t=>window.addEventListener(t, resumeIfAllowed, true));
+  }
+  startAnim();
 })();
