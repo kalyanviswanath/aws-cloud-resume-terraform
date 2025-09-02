@@ -43,11 +43,28 @@
 	<link rel="stylesheet" type="text/css" href="./assets/styles/style.css"/>
 	<link rel="stylesheet" type="text/css" href="./assets/styles/zeno.css"/>
 	<link rel="stylesheet" type="text/css" href="./assets/styles/cmdk.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/styles/experience.css"/>
 	<link rel="manifest" href="./manifest.webmanifest">
 	
 </head>
 <body class="home">
-    <canvas id="site-tech-bg" aria-hidden="true"></canvas>
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="intro-gate" id="intro-gate" aria-hidden="false">
+      <div class="intro-inner">
+        <div class="intro-title">Kalyan Viswanath</div>
+        <div class="intro-sub">Enter to experience — motion + sound</div>
+        <button class="intro-btn" id="intro-btn" aria-label="Enter">Enter</button>
+        <div class="intro-note">Respects reduced motion accessibility settings</div>
+      </div>
+    </div>
+    <button class="sound-toggle" id="sound-toggle" aria-label="Toggle sound" title="Toggle sound" data-state="off">
+      <svg class="sound-icon" width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path class="spk" d="M2 7h3l4-3v10l-4-3H2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path class="wave wave-1" d="M12 5c1.5 1.2 1.5 6.8 0 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <path class="wave wave-2" d="M15 3c3 2.5 3 11 0 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <path class="slash" d="M1 17L21 1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </button>
     <div class="site-wrap">
         <header class="topnav">
             <div class="brand">
@@ -81,6 +98,8 @@
 
         
 
+        
+
         <footer class="footer">
             <div>© <script>document.write(new Date().getFullYear())</script> Kalyan Viswanath</div>
             <div class="social">
@@ -102,7 +121,7 @@
         </div>
     </div>
     <style>
-    #site-tech-bg{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:0;filter:blur(1.2px) opacity(.72)}
+    #hero-canvas{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:0;filter:blur(0.8px) opacity(.9)}
     .site-wrap{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
     .footer{margin-top:auto}
     .bottom-links{display:none}
@@ -110,6 +129,17 @@
     @media (min-width:768px){ .hero .title{font-size:40px} }
     .cmdk-hint{cursor:pointer; display:inline-flex; align-items:center; gap:6px}
     .cmdk-hint .kbd{background:#202734;color:#d7ecff}
+    /* Intro gate + sound */
+    .intro-gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(1200px 800px at 50% 40%, rgba(0,170,255,.08), transparent 60%), linear-gradient(180deg, rgba(10,12,16,.95), rgba(10,12,16,.85));backdrop-filter:saturate(120%) blur(8px);z-index:2;transition:opacity .6s ease}
+    .intro-gate[aria-hidden="true"]{pointer-events:none;opacity:0}
+    .intro-inner{text-align:center;padding:32px 24px;color:#e7f2ff}
+    .intro-title{font-size:28px;font-weight:800;letter-spacing:.5px;margin-bottom:8px}
+    .intro-sub{opacity:.9;margin-bottom:14px}
+    .intro-btn{appearance:none;cursor:pointer;background:linear-gradient(135deg, #1aa3ff, #6a5cff);border:0;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;box-shadow:0 6px 20px rgba(26,163,255,.3)}
+    .intro-btn:hover{filter:brightness(1.05)}
+    .intro-note{margin-top:10px;color:#bcd7f0;font-size:12px}
+    .sound-toggle{position:fixed;right:14px;bottom:14px;z-index:3;appearance:none;border:1px solid rgba(255,255,255,.16);background:rgba(14,15,18,.6);backdrop-filter:saturate(120%) blur(8px);color:#e7f2ff;border-radius:999px;padding:10px 14px;font-weight:700}
+    .sound-toggle[data-state="on"]{border-color:rgba(30,200,255,.6)}
     /* Home mobile layout tweaks */
     @media (max-width: 640px){
       .home .brand{display:none}
@@ -143,6 +173,7 @@
     <script src="./assets/js/plugins.min.js"></script>
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/cmdk.js"></script>
+    <script src="./assets/js/experience.js" defer></script>
     <script>
       function openMobileContact(show){
         const el = document.getElementById('mobile-contact');
@@ -174,108 +205,7 @@
         document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeAll(); });
       })();
     </script>
-    <script>
-      (function(){
-        const canvas = document.getElementById('site-tech-bg');
-        if(!canvas) return;
-        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        const ctx = canvas.getContext('2d');
-        let width = 0, height = 0, dpr = Math.max(1, window.devicePixelRatio || 1);
-        let mouseX = 0.5, mouseY = 0.5;
-        const maxParallax = 80;
-        const items = [];
-        const iconSrcs = [
-          './assets/icons/icon-dev.svg',
-          './assets/icons/icon-app.svg',
-          './assets/icons/icon-design.svg',
-          './assets/icons/icon-education.svg',
-          './assets/icons/icon-experience.svg',
-          './assets/icons/icon-user.svg',
-          './assets/icons/icon-like.svg',
-          './assets/icons/icon-calendar.svg'
-        ];
-        const icons = iconSrcs.map(src => { const img = new Image(); img.src = src; return img; });
-        function resize(){
-          width = Math.max(1, Math.floor(window.innerWidth));
-          height = Math.max(1, Math.floor(window.innerHeight));
-          canvas.width = Math.floor(width * dpr);
-          canvas.height = Math.floor(height * dpr);
-          canvas.style.width = width + 'px';
-          canvas.style.height = height + 'px';
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-        function spawn(count){
-          for(let i=0;i<count;i++){
-            items.push({
-              x: Math.random()*width,
-              y: Math.random()*height,
-              z: 0.25 + Math.random()*0.75,
-              size: 18 + Math.random()*28,
-              speedX: (Math.random()-0.5)*0.25,
-              speedY: (Math.random()-0.5)*0.25,
-              rot: Math.random()*Math.PI*2,
-              rotSpeed: (Math.random()-0.5)*0.005,
-              img: icons[Math.floor(Math.random()*icons.length)]
-            });
-          }
-        }
-        function update(){
-          for(const it of items){
-            it.x += it.speedX * (0.5 + it.z);
-            it.y += it.speedY * (0.5 + it.z);
-            it.rot += it.rotSpeed;
-            if(it.x < -50) it.x = width+50; if(it.x > width+50) it.x = -50;
-            if(it.y < -50) it.y = height+50; if(it.y > height+50) it.y = -50;
-          }
-        }
-        function draw(){
-          ctx.clearRect(0,0,width,height);
-          const offsetX = (mouseX-0.5) * maxParallax;
-          const offsetY = (mouseY-0.5) * maxParallax;
-          for(const it of items){
-            const parallaxX = -offsetX * (1 - it.z);
-            const parallaxY = -offsetY * (1 - it.z);
-            const x = it.x + parallaxX;
-            const y = it.y + parallaxY;
-            const s = it.size * it.z;
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.rotate(it.rot);
-            ctx.globalAlpha = 0.15 + 0.55*it.z;
-            if(it.img && it.img.complete){
-              ctx.drawImage(it.img, -s/2, -s/2, s, s);
-            } else {
-              const r = s*0.2; ctx.fillStyle = 'rgba(0, 170, 255, 0.5)';
-              roundRect(ctx, -s/2, -s/2, s, s, r); ctx.fill();
-            }
-            ctx.restore();
-          }
-        }
-        function roundRect(ctx, x, y, w, h, r){
-          r = Math.min(r, w/2, h/2);
-          ctx.beginPath();
-          ctx.moveTo(x+r, y);
-          ctx.arcTo(x+w, y, x+w, y+h, r);
-          ctx.arcTo(x+w, y+h, x, y+h, r);
-          ctx.arcTo(x, y+h, x, y, r);
-          ctx.arcTo(x, y, x+w, y, r);
-          ctx.closePath();
-        }
-        function tick(){ update(); draw(); requestAnimationFrame(tick); }
-        function init(){ resize(); items.length = 0; spawn(Math.max(50, Math.floor(width*height/16000))); tick(); }
-        window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', e => {
-          mouseX = e.clientX / Math.max(1, window.innerWidth);
-          mouseY = e.clientY / Math.max(1, window.innerHeight);
-        });
-        window.addEventListener('touchmove', e => {
-          const t = e.touches[0]; if(!t) return;
-          mouseX = t.clientX / Math.max(1, window.innerWidth);
-          mouseY = t.clientY / Math.max(1, window.innerHeight);
-        }, {passive:true});
-        init();
-      })();
-    </script>
+    
 
 </body>
 </html>

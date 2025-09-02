@@ -1,0 +1,59 @@
+/* Experience visual layer: background, hero, controls */
+:root{
+  --fx-accent:#1aa3ff;
+  --fx-accent-2:#6a5cff;
+  --fx-bg:#0b0d12;
+}
+
+html, body { background: var(--fx-bg); }
+
+/* Optional active link style (no sticky header) */
+.topnav .links a.active{ color:#fff }
+.bottom-links a.active{ color:#fff; background: rgba(255,255,255,.08) }
+
+/* Hero section tweaks to float over canvas */
+.home .hero{ position:relative; z-index:1; text-align:center; will-change: transform, opacity; }
+.home .hero .title{ letter-spacing: .6px; background: linear-gradient(180deg,#e7f2ff,#8cc8ff); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow: 0 0 30px rgba(26,163,255,.15); }
+.home .hero .subtitle{ color:#b9cde0 }
+.home .hero .badge{ background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(6px); }
+
+/* Sound control */
+.sound-toggle{ position:fixed; right:14px; bottom:14px; z-index:4; appearance:none; border-radius:999px; width:44px; height:44px; display:grid; place-items:center; color:#e7f2ff; background: linear-gradient(180deg, rgba(14,15,18,.65), rgba(14,15,18,.5)); border:1px solid rgba(255,255,255,.14); box-shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06); transition: transform .15s ease, box-shadow .3s ease, background .3s ease, border-color .3s ease; }
+.sound-toggle:hover{ transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,0,0,.4), inset 0 0 0 1px rgba(255,255,255,.1); }
+.sound-toggle:active{ transform: translateY(0); }
+.sound-toggle .sound-icon{ display:block }
+.sound-toggle .slash{ opacity:0; transition:opacity .25s ease }
+.sound-toggle[data-state="off"] .slash{ opacity:1 }
+.sound-toggle[data-state="off"] .wave{ opacity:.18 }
+.sound-toggle[data-state="on"]{ color:#dff3ff; border-color: rgba(30,200,255,.55); background: linear-gradient(180deg, rgba(20,24,30,.7), rgba(20,24,30,.55)); }
+.sound-toggle[data-state="on"] .wave{ animation: wavePulse 1.2s ease-in-out infinite alternate; }
+@keyframes wavePulse{ from{ opacity:.3 } to{ opacity:.95 } }
+
+/* Subtle vignette on top of canvas */
+body:after{ content:""; position:fixed; inset:-10px; pointer-events:none; z-index:0; background:
+  radial-gradient(1200px 800px at 50% -200px, rgba(26,163,255,.08), transparent 60%),
+  radial-gradient(1200px 800px at -100px 120%, rgba(106,92,255,.06), transparent 60%),
+  radial-gradient(1200px 800px at 110% 110%, rgba(0,0,0,.25), transparent 50%);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .intro-sub{ opacity:.8 }
+}
+
+/* Section layout defaults (no scroll snap on home) */
+/* Keep normal document flow so header/footer are visible */
+.section{ padding: 48px 16px; }
+
+/* Smoke/zoom transitions */
+@keyframes smokeOut{ from{ opacity:1; filter: blur(0px); transform: translateY(0) scale(1); } to{ opacity:0; filter: blur(18px); transform: translateY(-20px) scale(.98); } }
+@keyframes zoomIn{ from{ opacity:0; filter: blur(10px); transform: translateY(18px) scale(1.02); } to{ opacity:1; filter: blur(0px); transform: translateY(0) scale(1); } }
+.section.entering, .hero.entering{ animation: zoomIn .6s ease both; }
+.section.leaving, .hero.leaving{ animation: smokeOut .6s ease both; }
+
+@media (max-width:640px){ .section{ min-height: min(110vh, 1200px); } }
+
+/* Smoke-in reveal for header/footer on enter */
+@keyframes smokeIn{ from{ opacity:0; filter: blur(14px); transform: translateY(8px); } to{ opacity:1; filter: blur(0px); transform: translateY(0); } }
+.home .topnav, .home .footer{ opacity:0; filter: blur(10px); transform: translateY(6px); }
+.home.ui-reveal .topnav{ animation: smokeIn .8s ease forwards .05s; }
+.home.ui-reveal .footer{ animation: smokeIn .9s ease forwards .15s; }
