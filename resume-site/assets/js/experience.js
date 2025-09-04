@@ -10,8 +10,8 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas = document.getElementById('hero-canvas');
 
-  const gate = document.getElementById('intro-gate');
-  const gateBtn = document.getElementById('intro-btn');
+  const gate = null; // intro gate removed
+  const gateBtn = null;
   const hero = document.querySelector('.hero');
 
   // Background particles (2D) — only if canvas exists (home page)
@@ -117,24 +117,14 @@
 
   // Controls
   function enter(){
-    if(gate) gate.setAttribute('aria-hidden','true');
     startAnim();
     document.body && document.body.classList.add('ui-reveal');
-    try{ localStorage.setItem('kv_entered', '1'); }catch(e){}
   }
-
-  if(gateBtn) gateBtn.addEventListener('click', enter);
-  if(gate) gate.addEventListener('click', (e) => { if(e.target === gate) enter(); });
   // no sound toggle
 
   // Start
   function startAnim(){ cancelAnimationFrame(rafId); resize(); last=performance.now(); rafId=requestAnimationFrame(loop); }
-  // If user already entered once, do not show the gate again on home
-  const enteredBefore = (()=>{ try{ return localStorage.getItem('kv_entered') === '1'; }catch(e){ return false; } })();
-  if(document.body && document.body.classList.contains('home')){
-    if(enteredBefore && gate){ gate.setAttribute('aria-hidden','true'); document.body.classList.add('ui-reveal'); }
-  }
-  // If motion reduced, skip canvas anim
-  if(reduceMotion){ if(gate) gate.setAttribute('aria-hidden','true'); document.body && document.body.classList.add('ui-reveal'); }
+  // Reveal UI immediately (intro removed)
+  if(document.body) document.body.classList.add('ui-reveal');
   startAnim();
 })();

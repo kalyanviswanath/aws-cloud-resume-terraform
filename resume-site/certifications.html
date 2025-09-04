@@ -85,10 +85,31 @@
     </footer>
   </div>
   <nav class="bottom-links" aria-label="Primary">
-    <a href="index.html">Home</a>
-    <a href="projects.html">Work</a>
-    <a href="certifications.html">Certifications</a>
-    <button class="contact-shortcut" onclick="openMobileContact(true)">Contact</button>
+    <a href="index.html" class="tab" aria-label="Home" title="Home">
+      <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 10.5L12 3l9 7.5"/>
+        <path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/>
+      </svg>
+    </a>
+    <a href="projects.html" class="tab" aria-label="Work" title="Work">
+      <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 7h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+        <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>
+        <path d="M3 12h18"/>
+      </svg>
+    </a>
+    <a href="certifications.html" class="tab active" aria-label="Certifications" title="Certifications">
+      <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M8.5 12.5L6 21l6-3 6 3-2.5-8.5"/>
+      </svg>
+    </a>
+    <button class="tab contact-shortcut" aria-label="Contact" title="Contact" onclick="openMobileContact(true)">
+      <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
+        <path d="M22 8l-10 6L2 8"/>
+      </svg>
+    </button>
   </nav>
   <div class="mobile-contact" id="mobile-contact">
     <div class="sheet">
@@ -114,12 +135,13 @@
       animation: spotSweep 20s ease-in-out infinite alternate; }
     @keyframes spotSweep{ 0%{ transform:translate3d(0,0,0) } 100%{ transform:translate3d(0,-1px,0) } }
     @media (max-width:640px){
+      /* On mobile, show only the counter (mobile-top); hide header bar */
       .topnav{display:none}
-      .footer{display:none}
       .mobile-top{position:fixed;left:0;right:0;top:12px;display:flex;justify-content:center;z-index:2}
       .bottom-links{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-around;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px);background:rgba(14,15,18,.72);backdrop-filter:saturate(120%) blur(8px);border-top:1px solid var(--border);z-index:3}
-      .bottom-links a,.bottom-links button{appearance:none;background:transparent;border:0;color:#cfd3d9;font-weight:600;padding:8px 10px;border-radius:10px}
-      .bottom-links a:hover,.bottom-links button:hover{color:#fff;background:rgba(255,255,255,.06)}
+    .bottom-links a,.bottom-links button{appearance:none;background:transparent;border:0;color:#cfd3d9;padding:6px 10px;border-radius:10px;width:64px;height:44px;display:grid;place-items:center}
+    .bottom-links .icon{width:22px;height:22px;display:block}
+    .bottom-links a:hover,.bottom-links button:hover{color:#fff;background:rgba(255,255,255,.06)}
       .mobile-contact{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:4}
       .mobile-contact.open{display:flex}
       .mobile-contact .sheet{width:100%;background:var(--surface);border-top:1px solid var(--border);border-radius:12px 12px 0 0;padding:16px 20px 20px;display:flex;gap:16px;justify-content:space-around}
