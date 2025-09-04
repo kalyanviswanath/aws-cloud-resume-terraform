@@ -52,19 +52,11 @@
     <div class="intro-gate" id="intro-gate" aria-hidden="false">
       <div class="intro-inner">
         <div class="intro-title">Kalyan Viswanath</div>
-        <div class="intro-sub">Enter to experience — motion + sound</div>
+        <div class="intro-sub">Enter to experience — motion</div>
         <button class="intro-btn" id="intro-btn" aria-label="Enter">Enter</button>
         <div class="intro-note">Respects reduced motion accessibility settings</div>
       </div>
     </div>
-    <button class="sound-toggle" id="sound-toggle" aria-label="Toggle sound" title="Toggle sound" data-state="off">
-      <svg class="sound-icon" width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <path class="spk" d="M2 7h3l4-3v10l-4-3H2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-        <path class="wave wave-1" d="M12 5c1.5 1.2 1.5 6.8 0 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-        <path class="wave wave-2" d="M15 3c3 2.5 3 11 0 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-        <path class="slash" d="M1 17L21 1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-      </svg>
-    </button>
     <div class="site-wrap">
         <header class="topnav">
             <div class="brand">
@@ -138,8 +130,11 @@
     .intro-btn{appearance:none;cursor:pointer;background:linear-gradient(135deg, #1aa3ff, #6a5cff);border:0;color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;box-shadow:0 6px 20px rgba(26,163,255,.3)}
     .intro-btn:hover{filter:brightness(1.05)}
     .intro-note{margin-top:10px;color:#bcd7f0;font-size:12px}
-    .sound-toggle{position:fixed;right:14px;bottom:14px;z-index:3;appearance:none;border:1px solid rgba(255,255,255,.16);background:rgba(14,15,18,.6);backdrop-filter:saturate(120%) blur(8px);color:#e7f2ff;border-radius:999px;padding:10px 14px;font-weight:700}
-    .sound-toggle[data-state="on"]{border-color:rgba(30,200,255,.6)}
+    /* removed sound-toggle styles */
+    /* Page transitions */
+    .site-wrap{ opacity:0; transform:translateY(8px); transition: opacity .35s ease, transform .35s ease }
+    body.page-ready .site-wrap{ opacity:1; transform:none }
+    body.page-exit .site-wrap{ opacity:0; transform:translateY(8px) }
     /* Home mobile layout tweaks */
     @media (max-width: 640px){
       .home .brand{display:none}
@@ -147,9 +142,9 @@
       .home .footer{display:none}
       .home .hero{margin-top:24px}
       .home .header-center{position:absolute;left:50%;top:16px;transform:translateX(-50%);}
-      .home .bottom-links{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-around;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px);background:rgba(14,15,18,.72);backdrop-filter:saturate(120%) blur(8px);border-top:1px solid var(--border);z-index:3}
-      .home .bottom-links a,.home .bottom-links button{appearance:none;background:transparent;border:0;color:#cfd3d9;font-weight:600;padding:8px 10px;border-radius:10px}
-      .home .bottom-links a:hover,.home .bottom-links button:hover{color:#fff;background:rgba(255,255,255,.06)}
+      .bottom-links{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-around;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px);background:rgba(14,15,18,.72);backdrop-filter:saturate(120%) blur(8px);border-top:1px solid var(--border);z-index:3}
+      .bottom-links a,.bottom-links button{appearance:none;background:transparent;border:0;color:#cfd3d9;font-weight:600;padding:8px 10px;border-radius:10px}
+      .bottom-links a:hover,.bottom-links button:hover{color:#fff;background:rgba(255,255,255,.06)}
       .home .mobile-contact{position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:4}
       .home .mobile-contact .sheet{width:100%;background:var(--surface);border-top:1px solid var(--border);border-radius:12px 12px 0 0;padding:16px 20px 20px;display:flex;gap:16px;justify-content:space-around}
       .home .mobile-contact a,.home .mobile-contact .close{appearance:none;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--text);padding:10px 12px;font-weight:600}
@@ -173,6 +168,24 @@
     <script src="./assets/js/plugins.min.js"></script>
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/cmdk.js"></script>
+    <script>
+      // Page transitions: fade/slide between pages
+      (function(){
+        function sameOrigin(href){ try{ const u=new URL(href, location.href); return u.origin === location.origin; }catch(e){ return false; } }
+        function shouldHandle(a){ if(!a) return false; const t=a.getAttribute('target'); if(t && t !== '' && t !== '_self') return false; const href=a.getAttribute('href')||''; if(href.startsWith('#')) return false; return sameOrigin(href) && /\.html(\?.*)?$/i.test(href); }
+        function onReady(){ document.body.classList.add('page-ready'); }
+        if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', onReady); } else { onReady(); }
+        document.addEventListener('click', (e) => {
+          const a = e.target.closest ? e.target.closest('a') : null; if(!a) return;
+          if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+          if(!shouldHandle(a)) return;
+          e.preventDefault();
+          const href = a.href;
+          document.body.classList.add('page-exit');
+          setTimeout(()=>{ location.href = href; }, 320);
+        });
+      })();
+    </script>
     <script src="./assets/js/experience.js" defer></script>
     <script>
       function openMobileContact(show){

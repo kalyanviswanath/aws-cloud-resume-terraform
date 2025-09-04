@@ -23,14 +23,6 @@
   <link rel="stylesheet" type="text/css" href="./assets/styles/cmdk.css"/>
 </head>
 <body>
-  <button class="sound-toggle" id="sound-toggle" aria-label="Toggle sound" title="Toggle sound" data-state="off" style="bottom:14px; right:14px;">
-    <svg class="sound-icon" width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-      <path class="spk" d="M2 7h3l4-3v10l-4-3H2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-      <path class="wave wave-1" d="M12 5c1.5 1.2 1.5 6.8 0 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-      <path class="wave wave-2" d="M15 3c3 2.5 3 11 0 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-      <path class="slash" d="M1 17L21 1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-    </svg>
-  </button>
   <div class="site-wrap">
     <div class="mobile-top">
       <div class="counter-pill"><span class="dot"></span> Visitors <span class="counter-number">—</span></div>
@@ -106,6 +98,10 @@
     </div>
   </div>
   <style>
+    /* Page transitions */
+    .site-wrap{ opacity:0; transform:translateY(8px); transition: opacity .35s ease, transform .35s ease }
+    body.page-ready .site-wrap{ opacity:1; transform:none }
+    body.page-exit .site-wrap{ opacity:0; transform:translateY(8px) }
     .footer{position:sticky;top:100vh}
     .bottom-links{display:none}
     .mobile-top{display:none}
@@ -136,6 +132,22 @@
   <script src="./assets/js/common.js"></script>
   <script src="./assets/js/cmdk.js"></script>
   <script src="./assets/js/experience.js" defer></script>
+  <script>
+    // Page transitions: fade/slide between pages
+    (function(){
+      function sameOrigin(href){ try{ const u=new URL(href, location.href); return u.origin === location.origin; }catch(e){ return false; } }
+      function shouldHandle(a){ if(!a) return false; const t=a.getAttribute('target'); if(t && t !== '' && t !== '_self') return false; const href=a.getAttribute('href')||''; if(href.startsWith('#')) return false; return sameOrigin(href) && /\.html(\?.*)?$/i.test(href); }
+      function onReady(){ document.body.classList.add('page-ready'); }
+      if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', onReady); } else { onReady(); }
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest ? e.target.closest('a') : null; if(!a) return;
+        if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+        if(!shouldHandle(a)) return;
+        e.preventDefault();
+        const href = a.href; document.body.classList.add('page-exit'); setTimeout(()=>{ location.href = href; }, 320);
+      });
+    })();
+  </script>
   <script>
     (function(){
       const menus = document.querySelectorAll('.contact-menu');
