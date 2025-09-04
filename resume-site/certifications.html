@@ -135,6 +135,9 @@
       animation: spotSweep 20s ease-in-out infinite alternate; }
     @keyframes spotSweep{ 0%{ transform:translate3d(0,0,0) } 100%{ transform:translate3d(0,-1px,0) } }
     @media (max-width:640px){
+      .site-wrap{ padding-top: calc(env(safe-area-inset-top, 0px) + 56px); }
+      /* Align first section top spacing with Work */
+      .section:first-of-type{ padding-top: 16px; }
       .footer{display:none}
       /* On mobile, show only the counter (mobile-top); hide header bar */
       .topnav{display:none}

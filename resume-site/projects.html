@@ -146,7 +146,7 @@
     .mobile-top{display:none}
     .mobile-contact{display:none}
     /* Ensure Work section is visible above visual layers */
-    #work{ position: relative; z-index: 1; padding-top: 24px; }
+    #work{ position: relative; z-index: 1; padding-top: 16px; }
     #work .grid{ display: grid !important; opacity: 1 !important; visibility: visible !important; transform:none !important; filter:none !important; }
     @media (min-width:641px){ .topnav{display:flex} }
     /* Bring back the subtle spotlight background like before */
@@ -156,6 +156,9 @@
       animation: spotSweep 20s ease-in-out infinite alternate; }
     @keyframes spotSweep{ 0%{ transform:translate3d(0,0,0) } 100%{ transform:translate3d(0,-1px,0) } }
     @media (max-width:640px){
+      .site-wrap{ padding-top: calc(env(safe-area-inset-top, 0px) + 56px); }
+      /* Align first section top spacing with Certifications */
+      .section:first-of-type{ padding-top: 16px; }
       .footer{display:none}
       /* On mobile, show only the counter (mobile-top); hide header bar */
       .topnav{display:none}
