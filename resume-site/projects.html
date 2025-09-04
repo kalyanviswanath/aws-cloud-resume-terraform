@@ -156,12 +156,14 @@
       animation: spotSweep 20s ease-in-out infinite alternate; }
     @keyframes spotSweep{ 0%{ transform:translate3d(0,0,0) } 100%{ transform:translate3d(0,-1px,0) } }
     @media (max-width:640px){
+      .footer{display:none}
       /* On mobile, show only the counter (mobile-top); hide header bar */
       .topnav{display:none}
       .mobile-top{position:fixed;left:0;right:0;top:12px;display:flex;justify-content:center;z-index:2}
       .bottom-links{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-around;gap:8px;padding:10px 12px calc(env(safe-area-inset-bottom, 0px) + 10px);background:rgba(14,15,18,.72);backdrop-filter:saturate(120%) blur(8px);border-top:1px solid var(--border);z-index:3}
     .bottom-links a,.bottom-links button{appearance:none;background:transparent;border:0;color:#cfd3d9;padding:6px 10px;border-radius:10px;width:64px;height:44px;display:grid;place-items:center}
     .bottom-links .icon{width:22px;height:22px;display:block}
+    .bottom-links a.active,.bottom-links button.active{ color:#fff; background: rgba(255,255,255,.08) }
     .bottom-links a:hover,.bottom-links button:hover{color:#fff;background:rgba(255,255,255,.06)}
       .mobile-contact{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:4}
       .mobile-contact.open{display:flex}
